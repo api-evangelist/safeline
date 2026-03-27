@@ -1,0 +1,38 @@
+aid: safeline
+name: SafeLine
+description: >-
+  SafeLine is an open-source reverse proxy with built-in Web Application Firewall (WAF) capabilities for protecting APIs and web applications.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Proxy
+  - WAF
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/safeline/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: safeline:safeline
+    name: SafeLine
+    description: >-
+      SafeLine is an open-source reverse proxy with built-in Web Application Firewall (WAF) capabilities for protecting APIs and web applications.
+    humanURL: https://waf.chaitin.com/
+    tags:
+      - Proxy
+      - WAF
+    properties:
+      - type: Documentation
+        url: https://docs.waf.chaitin.com/
+      - type: Getting Started
+        url: https://docs.waf.chaitin.com/en/getting-started
+common:
+  - type: Website
+    url: https://waf.chaitin.com/
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GitHub Organization
+    url: https://github.com/chaitin/SafeLine
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
