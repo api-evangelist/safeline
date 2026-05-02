@@ -1,0 +1,45 @@
+{
+  "title": "SafeLine ACL Rule Structure",
+  "description": "JSON structure documentation for a SafeLine WAF access control list rule for blocking or allowing traffic",
+  "type": "object",
+  "structure": {
+    "id": {"type": "integer", "description": "Unique ACL rule identifier"},
+    "name": {"type": "string", "description": "Descriptive name for the rule"},
+    "action": {
+      "type": "string",
+      "description": "Action to take when rule matches: block, allow, or log",
+      "enum": ["block", "allow", "log"]
+    },
+    "match_type": {
+      "type": "string",
+      "description": "Type of match condition: ip, ip_range, country, url, user_agent, header"
+    },
+    "match_value": {
+      "type": "string",
+      "description": "Value to match against (IP address, CIDR range, country code, URL pattern, etc.)"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Rule evaluation priority (lower number = higher priority)"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule is active and enforced"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional human-readable description of the rule purpose"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the rule was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the most recent rule modification"
+    }
+  },
+  "required": ["id", "name", "action", "match_type", "match_value", "enabled"]
+}

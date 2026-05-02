@@ -37,6 +37,8 @@ SafeLine provides MCP (Model Context Protocol) Server implementations for AI-ass
 - [SpectralRules](rules/safeline-rules.yml)
 - [JSONSchema](json-schema/safeline-website-schema.json)
 - [JSONSchema](json-schema/safeline-acl-rule-schema.json)
+- [JSONStructure](json-structure/safeline-website-structure.json)
+- [JSONStructure](json-structure/safeline-acl-rule-structure.json)
 - [JSONLDContext](json-ld/safeline-context.jsonld)
 - [Vocabulary](vocabulary/safeline-vocabulary.yml)
 - [Capabilities](capabilities/waf-protection-management.yaml)
@@ -58,6 +60,7 @@ SafeLine provides MCP (Model Context Protocol) Server implementations for AI-ass
 | JSON Schema | [json-schema/safeline-website-schema.json](json-schema/safeline-website-schema.json) |
 | JSON Schema | [json-schema/safeline-acl-rule-schema.json](json-schema/safeline-acl-rule-schema.json) |
 | JSON Structure | [json-structure/safeline-website-structure.json](json-structure/safeline-website-structure.json) |
+| JSON Structure | [json-structure/safeline-acl-rule-structure.json](json-structure/safeline-acl-rule-structure.json) |
 | JSON-LD Context | [json-ld/safeline-context.jsonld](json-ld/safeline-context.jsonld) |
 | Vocabulary | [vocabulary/safeline-vocabulary.yml](vocabulary/safeline-vocabulary.yml) |
 | Examples | [examples/](examples/) |

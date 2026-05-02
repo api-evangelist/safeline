@@ -85,6 +85,10 @@ common:
     url: json-schema/safeline-website-schema.json
   - type: JSONSchema
     url: json-schema/safeline-acl-rule-schema.json
+  - type: JSONStructure
+    url: json-structure/safeline-website-structure.json
+  - type: JSONStructure
+    url: json-structure/safeline-acl-rule-structure.json
   - type: JSONLDContext
     url: json-ld/safeline-context.jsonld
   - type: Vocabulary
