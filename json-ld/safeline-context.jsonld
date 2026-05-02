@@ -1,0 +1,35 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "safeline": "https://waf.chaitin.com/vocab/",
+    "security": "https://w3id.org/security#",
+
+    "Website": "schema:WebSite",
+    "AclRule": "safeline:AclRule",
+    "PolicyGroup": "safeline:PolicyGroup",
+    "Certificate": "schema:DigitalDocument",
+    "SecurityReport": "safeline:SecurityReport",
+    "ApiToken": "safeline:ApiToken",
+
+    "id": "@id",
+    "name": "schema:name",
+    "upstream": "safeline:upstream",
+    "ports": "safeline:ports",
+    "enabled": "schema:isAccessibleForFree",
+    "policy_group_id": "safeline:policyGroupId",
+    "ssl_id": "safeline:sslId",
+    "create_time": "schema:dateCreated",
+    "comment": "schema:description",
+    "action": "safeline:action",
+    "conditions": "safeline:conditions",
+    "rule_name": "schema:name",
+    "src_ip": "safeline:sourceIp",
+    "dst_host": "safeline:destinationHost",
+    "trigger_time": "schema:startTime",
+    "hostname": "schema:hostName",
+    "version": "schema:version",
+    "domains": "schema:domain",
+    "not_valid_before": "schema:validFrom",
+    "not_valid_after": "schema:validUntil"
+  }
+}

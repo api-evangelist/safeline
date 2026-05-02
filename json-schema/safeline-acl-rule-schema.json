@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/safeline/main/json-schema/safeline-acl-rule-schema.json",
+  "title": "SafeLine ACL Rule",
+  "description": "An access control list rule in SafeLine WAF for blocking or allowing traffic based on conditions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique ACL rule identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Descriptive name for the rule"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["block", "allow", "log"],
+      "description": "Action to take when the rule matches"
+    },
+    "conditions": {
+      "type": "array",
+      "description": "List of conditions that must match to trigger the rule",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": ["ip", "url", "method", "header", "body", "user_agent", "referer"],
+            "description": "HTTP request field to match against"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["equals", "contains", "startswith", "endswith", "matches", "in_cidr"],
+            "description": "Comparison operator"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to compare against"
+          }
+        },
+        "required": ["field", "operator", "value"]
+      }
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule is active"
+    },
+    "create_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Rule creation timestamp"
+    }
+  },
+  "required": ["id", "name", "action", "conditions"]
+}

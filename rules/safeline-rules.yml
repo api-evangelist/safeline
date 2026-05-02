@@ -1,0 +1,80 @@
+extends: spectral:oas
+rules:
+  safeline-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    message: "Operation summary '{{value}}' must use Title Case"
+    given: "$.paths[*][*].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-z]*)( [A-Z][a-z0-9]*)*$"
+
+  safeline-api-token-auth:
+    description: All endpoints must use X-SLCE-API-Token header authentication
+    message: "Endpoint must declare APITokenAuth security"
+    given: "$.paths[*][*]"
+    severity: error
+    then:
+      field: security
+      function: defined
+
+  safeline-operation-ids-camel-case:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    given: "$.paths[*][*].operationId"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  safeline-response-envelope-format:
+    description: All responses should use SafeLine envelope format with err, data, msg
+    message: "SafeLine API responses should use envelope with err, data, msg fields"
+    given: "$.components.schemas[*]"
+    severity: info
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  safeline-tags-defined:
+    description: All operations must have at least one tag
+    message: "Operation must have at least one tag"
+    given: "$.paths[*][*]"
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  safeline-management-endpoints-versioned:
+    description: SafeLine management API endpoints start with /api/ prefix
+    message: "SafeLine API paths must start with /api/"
+    given: "$.paths"
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\/api\\/"
+
+  safeline-paginated-endpoints:
+    description: List endpoints should support page and page_size parameters
+    message: "List endpoints should define pagination parameters"
+    given: "$.paths[*][get].parameters"
+    severity: info
+    then:
+      function: defined
+
+  safeline-security-scheme-apikey:
+    description: Security scheme must use apiKey type
+    message: "Security scheme must be of type apiKey for SafeLine"
+    given: "$.components.securitySchemes[*]"
+    severity: error
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - apiKey

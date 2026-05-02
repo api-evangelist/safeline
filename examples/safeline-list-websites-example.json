@@ -1,0 +1,59 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://localhost:9443/api/SoftwareReverseProxyWebsiteAPI",
+    "headers": {
+      "X-SLCE-API-Token": "{api-token}",
+      "Content-Type": "application/json"
+    },
+    "parameters": {
+      "page": 1,
+      "page_size": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "err": null,
+      "data": [
+        {
+          "id": 1,
+          "name": "Main Website",
+          "upstream": "192.168.1.100:8080",
+          "ports": [
+            {
+              "port": 443,
+              "protocol": "https"
+            },
+            {
+              "port": 80,
+              "protocol": "http"
+            }
+          ],
+          "enabled": true,
+          "policy_group_id": 1,
+          "ssl_id": 1,
+          "create_time": "2026-01-15T10:30:00Z",
+          "comment": "Production web application"
+        },
+        {
+          "id": 2,
+          "name": "API Backend",
+          "upstream": "192.168.1.101:3000",
+          "ports": [
+            {
+              "port": 443,
+              "protocol": "https"
+            }
+          ],
+          "enabled": true,
+          "policy_group_id": 1,
+          "ssl_id": 1,
+          "create_time": "2026-02-01T08:00:00Z",
+          "comment": "REST API backend"
+        }
+      ],
+      "msg": null
+    }
+  }
+}

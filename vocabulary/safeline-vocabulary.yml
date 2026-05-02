@@ -1,0 +1,118 @@
+vocabulary:
+  name: SafeLine WAF Vocabulary
+  description: Domain vocabulary for SafeLine Web Application Firewall, reverse proxy, access control, and web security terms.
+  version: "1.0.0"
+  created: "2026-05-02"
+  url: https://waf.chaitin.com/
+
+terms:
+  - term: WAF
+    label: Web Application Firewall
+    definition: >-
+      A security appliance or software that filters and monitors HTTP/HTTPS traffic
+      between web applications and the Internet, protecting against web attacks.
+    tags:
+      - Security
+      - Web Security
+
+  - term: ReverseProxy
+    label: Reverse Proxy
+    definition: >-
+      A server that sits in front of web servers and forwards client requests. In
+      SafeLine, the reverse proxy intercepts all traffic and passes it through the
+      WAF engine before forwarding to backend servers.
+    tags:
+      - Networking
+      - Proxy
+
+  - term: ACLRule
+    label: Access Control List Rule
+    definition: >-
+      A rule that defines conditions (IP, URL, headers) and an action (block, allow,
+      log) to apply to matching HTTP requests. SafeLine evaluates all configured
+      ACL rules against each request.
+    tags:
+      - Access Control
+      - Security Rules
+
+  - term: PolicyGroup
+    label: Security Policy Group
+    definition: >-
+      A collection of security rules applied to one or more protected websites.
+      Policy groups allow different security postures for different applications.
+    tags:
+      - Security Policy
+      - Configuration
+
+  - term: UpstreamServer
+    label: Upstream Server
+    definition: >-
+      The backend server that SafeLine reverse proxy forwards legitimate traffic to
+      after WAF inspection. Specified as host:port or IP:port.
+    tags:
+      - Networking
+      - Configuration
+
+  - term: SQLInjection
+    label: SQL Injection Attack
+    definition: >-
+      An attack where malicious SQL code is inserted into input fields to manipulate
+      database queries. One of the primary attack types SafeLine detects and blocks.
+    tags:
+      - Attack
+      - Security
+
+  - term: XSS
+    label: Cross-Site Scripting
+    definition: >-
+      An attack that injects malicious scripts into web pages viewed by other users.
+      SafeLine's WAF engine detects and blocks XSS payloads in request parameters.
+    tags:
+      - Attack
+      - Security
+
+  - term: RateLimit
+    label: Rate Limiting
+    definition: >-
+      A technique to control the rate of requests from a single source to protect
+      against DoS attacks and brute-force attempts. SafeLine supports per-IP and
+      per-endpoint rate limiting.
+    tags:
+      - DDoS Protection
+      - Security
+
+  - term: AntiBot
+    label: Anti-Bot Protection
+    definition: >-
+      Mechanisms to distinguish legitimate users from automated bots and crawlers,
+      including JavaScript challenges, CAPTCHAs, and behavioral analysis.
+    tags:
+      - Bot Protection
+      - Security
+
+  - term: DynamicProtection
+    label: Dynamic Code Protection
+    definition: >-
+      SafeLine's technique of encrypting HTML and JavaScript on each page visit to
+      prevent scraping, reverse engineering, and automated exploitation.
+    tags:
+      - Security
+      - Code Protection
+
+  - term: APIToken
+    label: API Management Token
+    definition: >-
+      An authentication credential used to access the SafeLine management API
+      programmatically, generated via the SafeLine UI or API endpoint.
+    tags:
+      - Authentication
+      - API
+
+  - term: MgtAPI
+    label: Management API
+    definition: >-
+      SafeLine's REST API exposed on port 9443 for programmatic management of WAF
+      configuration, website management, rule updates, and event analysis.
+    tags:
+      - API
+      - Management

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://localhost:9443/api/ACLRuleAPI",
+    "headers": {
+      "X-SLCE-API-Token": "{api-token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Block Suspicious IPs",
+      "action": "block",
+      "conditions": [
+        {
+          "field": "ip",
+          "operator": "in_cidr",
+          "value": "10.0.0.0/8"
+        }
+      ],
+      "comment": "Block internal network spoofed requests"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "err": null,
+      "data": {
+        "id": 15,
+        "name": "Block Suspicious IPs",
+        "action": "block",
+        "conditions": [
+          {
+            "field": "ip",
+            "operator": "in_cidr",
+            "value": "10.0.0.0/8"
+          }
+        ],
+        "enabled": true,
+        "create_time": "2026-05-02T10:15:00Z"
+      },
+      "msg": null
+    }
+  }
+}

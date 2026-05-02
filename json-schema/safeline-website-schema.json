@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/safeline/main/json-schema/safeline-website-schema.json",
+  "title": "SafeLine Protected Website",
+  "description": "A web application protected by SafeLine WAF reverse proxy.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique website identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name for the protected website"
+    },
+    "upstream": {
+      "type": "string",
+      "description": "Backend server address (host:port or IP:port)",
+      "example": "192.168.1.100:8080"
+    },
+    "ports": {
+      "type": "array",
+      "description": "Listener ports for the reverse proxy",
+      "items": {
+        "type": "object",
+        "properties": {
+          "port": {
+            "type": "integer",
+            "description": "Port number"
+          },
+          "protocol": {
+            "type": "string",
+            "enum": ["http", "https"],
+            "description": "Protocol type"
+          }
+        },
+        "required": ["port", "protocol"]
+      }
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether WAF protection is enabled"
+    },
+    "policy_group_id": {
+      "type": "integer",
+      "description": "Applied security policy group ID"
+    },
+    "ssl_id": {
+      "type": "integer",
+      "description": "SSL certificate ID for HTTPS"
+    },
+    "create_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Website creation timestamp"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional description or notes"
+    }
+  },
+  "required": ["id", "name", "upstream", "ports"]
+}

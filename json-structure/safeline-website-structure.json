@@ -1,0 +1,27 @@
+{
+  "title": "SafeLine Website Structure",
+  "description": "JSON structure documentation for SafeLine WAF protected website configuration",
+  "type": "object",
+  "structure": {
+    "id": {"type": "integer", "description": "Unique website ID"},
+    "name": {"type": "string", "description": "Friendly website name"},
+    "upstream": {
+      "type": "string",
+      "description": "Backend server address in host:port format",
+      "example": "192.168.1.100:8080"
+    },
+    "ports": {
+      "type": "array",
+      "description": "Reverse proxy listener configurations",
+      "items": {
+        "port": {"type": "integer", "description": "Listener port"},
+        "protocol": {"type": "string", "enum": ["http", "https"]}
+      }
+    },
+    "enabled": {"type": "boolean", "description": "WAF protection enabled state"},
+    "policy_group_id": {"type": "integer", "description": "Assigned security policy group"},
+    "ssl_id": {"type": "integer", "description": "SSL certificate ID for HTTPS"},
+    "create_time": {"type": "string", "format": "date-time"},
+    "comment": {"type": "string", "description": "Optional notes"}
+  }
+}

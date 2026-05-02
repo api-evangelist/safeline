@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://localhost:9443/api/ACLRuleExecutionLogAPI",
+    "headers": {
+      "X-SLCE-API-Token": "{api-token}",
+      "Content-Type": "application/json"
+    },
+    "parameters": {
+      "page": 1,
+      "page_size": 10,
+      "start_time": 1746129600,
+      "end_time": 1746216000
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "err": null,
+      "data": [
+        {
+          "id": 1001,
+          "rule_id": 5,
+          "rule_name": "Block SQL Injection Patterns",
+          "action": "block",
+          "src_ip": "203.0.113.42",
+          "dst_host": "api.example.com",
+          "request_method": "POST",
+          "request_url": "/api/users?id=1 OR 1=1",
+          "trigger_time": "2026-05-02T09:45:00Z"
+        },
+        {
+          "id": 1002,
+          "rule_id": 8,
+          "rule_name": "Rate Limit Brute Force",
+          "action": "block",
+          "src_ip": "198.51.100.15",
+          "dst_host": "app.example.com",
+          "request_method": "POST",
+          "request_url": "/login",
+          "trigger_time": "2026-05-02T09:47:30Z"
+        }
+      ],
+      "msg": null
+    }
+  }
+}

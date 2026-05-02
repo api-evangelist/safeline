@@ -1,0 +1,362 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SafeLine WAF Protection Management"
+  description: "Unified workflow for managing web application firewall protection including website configuration, ACL rules, SSL certificates, security policies, and attack event analysis. Used by security engineers and IT admins to protect web applications."
+  tags:
+    - WAF
+    - Security
+    - Web Application Firewall
+    - Open Source
+    - Reverse Proxy
+    - ACL
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAFELINE_API_TOKEN: SAFELINE_API_TOKEN
+
+capability:
+  consumes:
+    - import: safeline
+      location: ./shared/safeline-management.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: waf-protection-api
+      description: "Unified REST API for SafeLine WAF protection management."
+      resources:
+        - path: /v1/websites
+          name: websites
+          description: "Protected website management"
+          operations:
+            - method: GET
+              name: list-websites
+              description: "List all websites protected by SafeLine WAF"
+              call: "safeline.list-websites"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-website
+              description: "Add a new website to WAF protection"
+              call: "safeline.create-website"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/websites/toggle
+          name: website-protection
+          description: "Enable or disable website protection"
+          operations:
+            - method: POST
+              name: toggle-website-protection
+              description: "Enable or disable WAF protection for a specific website"
+              call: "safeline.toggle-website-protection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/ssl-certificates
+          name: ssl-certificates
+          description: "SSL certificate management"
+          operations:
+            - method: GET
+              name: list-ssl-certificates
+              description: "List SSL certificates configured in SafeLine"
+              call: "safeline.list-ssl-certificates"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/acl-rules
+          name: acl-rules
+          description: "Access control list rules"
+          operations:
+            - method: GET
+              name: list-acl-rules
+              description: "List traffic ACL rules"
+              call: "safeline.list-acl-rules"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-acl-rule
+              description: "Create a new ACL rule"
+              call: "safeline.create-acl-rule"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/acl-whitelist
+          name: acl-whitelist
+          description: "ACL whitelist management"
+          operations:
+            - method: GET
+              name: list-acl-whitelist
+              description: "List whitelisted IP addresses"
+              call: "safeline.list-acl-whitelist"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: add-to-acl-whitelist
+              description: "Add IP or CIDR to whitelist"
+              call: "safeline.add-to-acl-whitelist"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/policy-groups
+          name: policy-groups
+          description: "Security policy groups"
+          operations:
+            - method: GET
+              name: list-policy-groups
+              description: "List security policy groups"
+              call: "safeline.list-policy-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-policy-group
+              description: "Create a security policy group"
+              call: "safeline.create-policy-group"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/reports
+          name: security-reports
+          description: "Security reports"
+          operations:
+            - method: GET
+              name: get-report-results
+              description: "Get security reports"
+              call: "safeline.get-report-results"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/acl-logs
+          name: acl-execution-logs
+          description: "ACL rule execution logs"
+          operations:
+            - method: GET
+              name: get-acl-execution-logs
+              description: "Get ACL rule execution logs"
+              call: "safeline.get-acl-execution-logs"
+              with:
+                page: "rest.page"
+                start_time: "rest.start_time"
+                end_time: "rest.end_time"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/system/node
+          name: node-info
+          description: "System information"
+          operations:
+            - method: GET
+              name: get-node-info
+              description: "Get SafeLine node system information"
+              call: "safeline.get-node-info"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: waf-protection-mcp
+      transport: http
+      description: "MCP server for AI-assisted WAF protection management and security configuration."
+      tools:
+        - name: list-websites
+          description: "List all web applications protected by SafeLine WAF with their configuration"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-websites"
+          with:
+            page: "tools.page"
+            page_size: "tools.page_size"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-website
+          description: "Add a new web application to SafeLine WAF protection"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "safeline.create-website"
+          with:
+            name: "tools.name"
+            upstream: "tools.upstream"
+            ports: "tools.ports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: toggle-website-protection
+          description: "Enable or disable WAF protection for a specific website"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "safeline.toggle-website-protection"
+          with:
+            id: "tools.id"
+            enabled: "tools.enabled"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-ssl-certificates
+          description: "List all SSL/TLS certificates managed by SafeLine"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-ssl-certificates"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-acl-rules
+          description: "List access control rules for blocking or allowing specific traffic patterns"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-acl-rules"
+          with:
+            page: "tools.page"
+            page_size: "tools.page_size"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-acl-rule
+          description: "Create a new ACL rule to block or allow traffic based on IP, URL, or headers"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "safeline.create-acl-rule"
+          with:
+            name: "tools.name"
+            action: "tools.action"
+            conditions: "tools.conditions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-acl-whitelist
+          description: "List IP addresses and CIDR blocks in the ACL whitelist"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-acl-whitelist"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: add-to-acl-whitelist
+          description: "Add an IP address or CIDR block to the ACL whitelist"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "safeline.add-to-acl-whitelist"
+          with:
+            ip: "tools.ip"
+            comment: "tools.comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-policy-groups
+          description: "List security policy groups with their rule counts"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-policy-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-policy-group
+          description: "Create a new security policy group for organizing WAF rules"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "safeline.create-policy-group"
+          with:
+            name: "tools.name"
+            comment: "tools.comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-report-results
+          description: "Get generated security reports showing attack statistics and traffic analysis"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.get-report-results"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-acl-execution-logs
+          description: "Get logs of triggered ACL rules showing blocked/allowed requests and source IPs"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.get-acl-execution-logs"
+          with:
+            page: "tools.page"
+            page_size: "tools.page_size"
+            start_time: "tools.start_time"
+            end_time: "tools.end_time"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-node-info
+          description: "Get SafeLine system node information including CPU, memory, and version"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.get-node-info"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-api-tokens
+          description: "List API tokens for programmatic access to SafeLine management"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "safeline.list-api-tokens"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-api-token
+          description: "Create a new API token for SafeLine management automation"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "safeline.create-api-token"
+          with:
+            comment: "tools.comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
