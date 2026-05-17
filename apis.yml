@@ -43,7 +43,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.waf.chaitin.com/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.waf.chaitin.com/en/getting-started
       - type: GitHubRepository
         url: https://github.com/chaitin/SafeLine
