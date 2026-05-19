@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SafeLine Management API — Authentication
+  description: 'SafeLine Management API — Authentication. 1 operations. Lead operation: Authenticate User. Self-contained
+    Naftiko capability covering one Safeline business surface.'
+  tags:
+  - Safeline
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAFELINE_API_KEY: SAFELINE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-authentication
+    baseUri: https://{host}:9443
+    description: SafeLine Management API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: api-LoginAPI
+      path: /api/LoginAPI
+      operations:
+      - name: loginuser
+        method: POST
+        description: Authenticate User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-SLCE-API-Token
+      value: '{{env.SAFELINE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: management-authentication-rest
+    port: 8080
+    description: REST adapter for SafeLine Management API — Authentication. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/loginapi
+      name: api-loginapi
+      description: REST surface for api-LoginAPI.
+      operations:
+      - method: POST
+        name: loginuser
+        description: Authenticate User
+        call: management-authentication.loginuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SafeLine Management API — Authentication. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: authenticate-user
+      description: Authenticate User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-authentication.loginuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
