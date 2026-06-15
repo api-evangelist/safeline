@@ -1,0 +1,594 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/LoginAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user with username and password to create a session. Returns user profile including permissions and session configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/UserAPITokenAPI"
+          },
+          "docs": "Retrieves all API tokens for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create API Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/UserAPITokenAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API token for programmatic access to the SafeLine management API."
+        },
+        {
+          "info": {
+            "name": "Delete API Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/UserAPITokenAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an existing API token by ID."
+        },
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/UserAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of user accounts."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/UserAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user account with specified permissions."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}:9443/api/UserAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing user account configuration."
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/UserAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a user account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Websites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Protected Websites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of all websites (applications) protected by the SafeLine WAF reverse proxy, including their configuration and protection status."
+        },
+        {
+          "info": {
+            "name": "Create Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new website to SafeLine WAF protection with reverse proxy configuration."
+        },
+        {
+          "info": {
+            "name": "Update Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing protected website."
+        },
+        {
+          "info": {
+            "name": "Delete Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a website from SafeLine WAF protection."
+        },
+        {
+          "info": {
+            "name": "Enable or Disable Website Protection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/EnableDisableWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables or disables WAF protection for a specific website."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSL Certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SSL Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/CertAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all SSL/TLS certificates configured in SafeLine."
+        },
+        {
+          "info": {
+            "name": "Delete SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/CertAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an SSL certificate from SafeLine."
+        },
+        {
+          "info": {
+            "name": "Upload SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/UploadSSLCertAPI",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "crt_file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "key_file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads an SSL/TLS certificate and private key for use with protected websites."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ACL Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ACL Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves configured access control list rules for blocking or allowing traffic."
+        },
+        {
+          "info": {
+            "name": "Create ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new access control rule for blocking or allowing specific traffic patterns."
+        },
+        {
+          "info": {
+            "name": "Update ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing access control rule."
+        },
+        {
+          "info": {
+            "name": "Delete ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an access control rule."
+        },
+        {
+          "info": {
+            "name": "List ACL Whitelist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLWhiteListAPI"
+          },
+          "docs": "Retrieves IP addresses and patterns in the ACL whitelist."
+        },
+        {
+          "info": {
+            "name": "Add to ACL Whitelist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/ACLWhiteListAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an IP address or CIDR block to the ACL whitelist."
+        },
+        {
+          "info": {
+            "name": "Get ACL Rule Execution Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLRuleExecutionLogAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves logs of ACL rule executions showing triggered rules and actions taken."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Policy Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/PolicyGroupAPI"
+          },
+          "docs": "Retrieves security policy groups configured in SafeLine."
+        },
+        {
+          "info": {
+            "name": "Create Policy Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/PolicyGroupAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new security policy group with custom rules."
+        },
+        {
+          "info": {
+            "name": "List Policy Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/PolicyRuleAPI",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves security policy rules within policy groups."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Security Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ReportResultAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves generated security reports including attack statistics and traffic analysis."
+        },
+        {
+          "info": {
+            "name": "Generate Security Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/ManualGenerateReportAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers manual generation of a security report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Node Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/NodeInfoAPI"
+          },
+          "docs": "Retrieves system node information including hardware stats and cluster status."
+        },
+        {
+          "info": {
+            "name": "Get License Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/LicenseAPI"
+          },
+          "docs": "Retrieves current SafeLine license information and feature entitlements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
