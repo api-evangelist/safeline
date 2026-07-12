@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/safeline-management-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: APITokenAuth
+  type: apiKey
+  in: header
+  parameter: X-SLCE-API-Token
+  description: API token obtained from the SafeLine management interface
+  sources:
+  - openapi/safeline-management-openapi.yml

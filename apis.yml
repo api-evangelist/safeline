@@ -59,6 +59,10 @@ apis:
       - type: GitHubRepository
         url: https://github.com/chaitin/SafeLine
 common:
+  - type: DomainSecurity
+    url: security/safeline-domain-security.yml
+  - type: Authentication
+    url: authentication/safeline-authentication.yml
   - type: Website
     url: https://waf.chaitin.com/
   - type: Documentation
