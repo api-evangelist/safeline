@@ -59,6 +59,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/chaitin/SafeLine
 common:
+  - type: AgenticAccess
+    url: agentic-access/safeline-agentic-access.yml
   - type: DomainSecurity
     url: security/safeline-domain-security.yml
   - type: Authentication
