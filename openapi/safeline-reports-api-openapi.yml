@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules Reports API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: Reports
+  description: Security report generation and retrieval
+paths:
+  /api/ReportResultAPI:
+    get:
+      operationId: getReportResults
+      summary: Get Security Reports
+      description: Retrieves generated security reports including attack statistics and traffic analysis.
+      tags:
+      - Reports
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Report results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListResponse'
+  /api/ManualGenerateReportAPI:
+    post:
+      operationId: generateReport
+      summary: Generate Security Report
+      description: Triggers manual generation of a security report.
+      tags:
+      - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReportRequest'
+      responses:
+        '200':
+          description: Report generation triggered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    GenerateReportRequest:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+        create_time:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - completed
+          - failed
+        download_url:
+          type: string
+    ReportListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+        msg:
+          type: string
+          nullable: true
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

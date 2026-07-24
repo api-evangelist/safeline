@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules System API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: System
+  description: System configuration and administration
+paths:
+  /api/NodeInfoAPI:
+    get:
+      operationId: getNodeInfo
+      summary: Get Node Information
+      description: Retrieves system node information including hardware stats and cluster status.
+      tags:
+      - System
+      responses:
+        '200':
+          description: Node information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeInfoResponse'
+  /api/LicenseAPI:
+    get:
+      operationId: getLicenseInfo
+      summary: Get License Information
+      description: Retrieves current SafeLine license information and feature entitlements.
+      tags:
+      - System
+      responses:
+        '200':
+          description: License information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseResponse'
+components:
+  schemas:
+    LicenseResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - community
+              - professional
+              - enterprise
+            expires_at:
+              type: string
+              nullable: true
+            features:
+              type: array
+              items:
+                type: string
+        msg:
+          type: string
+          nullable: true
+    NodeInfoResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            hostname:
+              type: string
+            version:
+              type: string
+            cpu_usage:
+              type: number
+            memory_total:
+              type: integer
+            memory_used:
+              type: integer
+            disk_total:
+              type: integer
+            disk_used:
+              type: integer
+            uptime:
+              type: integer
+        msg:
+          type: string
+          nullable: true
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

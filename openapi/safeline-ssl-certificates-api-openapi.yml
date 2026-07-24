@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules SSL Certificates API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: SSL Certificates
+  description: SSL/TLS certificate management
+paths:
+  /api/CertAPI:
+    get:
+      operationId: listSslCertificates
+      summary: List SSL Certificates
+      description: Retrieves all SSL/TLS certificates configured in SafeLine.
+      tags:
+      - SSL Certificates
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Certificate list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateListResponse'
+    delete:
+      operationId: deleteSslCertificate
+      summary: Delete SSL Certificate
+      description: Deletes an SSL certificate from SafeLine.
+      tags:
+      - SSL Certificates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Certificate deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/UploadSSLCertAPI:
+    post:
+      operationId: uploadSslCertificate
+      summary: Upload SSL Certificate
+      description: Uploads an SSL/TLS certificate and private key for use with protected websites.
+      tags:
+      - SSL Certificates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                crt_file:
+                  type: string
+                  format: binary
+                  description: Certificate file (PEM format)
+                key_file:
+                  type: string
+                  format: binary
+                  description: Private key file (PEM format)
+                name:
+                  type: string
+                  description: Certificate name (optional, defaults to domain names)
+                id:
+                  type: integer
+                  description: Certificate ID for updates (optional)
+      responses:
+        '200':
+          description: Certificate uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateResponse'
+components:
+  schemas:
+    CertificateListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+    CertificateResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    Certificate:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        websites:
+          type: array
+          items:
+            type: integer
+        signature:
+          type: string
+        info:
+          type: object
+          properties:
+            serial:
+              type: string
+            issuer:
+              type: string
+            domains:
+              type: array
+              items:
+                type: string
+            not_valid_before:
+              type: number
+            not_valid_after:
+              type: number
+        create_time:
+          type: string
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

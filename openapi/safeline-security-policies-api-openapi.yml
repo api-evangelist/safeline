@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules Security Policies API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: Security Policies
+  description: Security policy and rule group management
+paths:
+  /api/PolicyGroupAPI:
+    get:
+      operationId: listPolicyGroups
+      summary: List Policy Groups
+      description: Retrieves security policy groups configured in SafeLine.
+      tags:
+      - Security Policies
+      responses:
+        '200':
+          description: Policy group list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyGroupListResponse'
+    post:
+      operationId: createPolicyGroup
+      summary: Create Policy Group
+      description: Creates a new security policy group with custom rules.
+      tags:
+      - Security Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyGroupRequest'
+      responses:
+        '200':
+          description: Policy group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyGroupResponse'
+  /api/PolicyRuleAPI:
+    get:
+      operationId: listPolicyRules
+      summary: List Policy Rules
+      description: Retrieves security policy rules within policy groups.
+      tags:
+      - Security Policies
+      parameters:
+      - name: group_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Policy rule list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyRuleListResponse'
+components:
+  schemas:
+    PolicyGroupResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+    PolicyRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyRule'
+        msg:
+          type: string
+          nullable: true
+    CreatePolicyGroupRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
+    PolicyGroupListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+    PolicyGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        comment:
+          type: string
+        rule_count:
+          type: integer
+        create_time:
+          type: string
+    PolicyRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        priority:
+          type: integer
+        enabled:
+          type: boolean
+        group_id:
+          type: integer
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

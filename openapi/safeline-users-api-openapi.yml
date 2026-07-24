@@ -1,0 +1,322 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules Users API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: Users
+  description: User account and permission management
+paths:
+  /api/UserAPITokenAPI:
+    get:
+      operationId: listApiTokens
+      summary: List API Tokens
+      description: Retrieves all API tokens for the authenticated user.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: List of API tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiTokenListResponse'
+    post:
+      operationId: createApiToken
+      summary: Create API Token
+      description: Creates a new API token for programmatic access to the SafeLine management API.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiTokenRequest'
+      responses:
+        '200':
+          description: API token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApiTokenResponse'
+    delete:
+      operationId: deleteApiToken
+      summary: Delete API Token
+      description: Deletes an existing API token by ID.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Token deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/UserAPI:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Retrieves a paginated list of user accounts.
+      tags:
+      - Users
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Creates a new user account with specified permissions.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates an existing user account configuration.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Deletes a user account.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        is_locked:
+          type: boolean
+        tfa_enabled:
+          type: boolean
+        permissions:
+          type: array
+          items:
+            type: string
+          example:
+          - System Monitor
+          - System Management
+          - User Management
+          - Website And Security Policy Management
+          - Audit Log Management
+        authentication_method:
+          type: string
+          enum:
+          - password
+          - cert
+        session_timeout_time:
+          type: integer
+          description: Session timeout in seconds
+        create_time:
+          type: string
+        last_login_time:
+          type: string
+    CreateUserRequest:
+      type: object
+      required:
+      - username
+      - password
+      - permissions
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        comment:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    UpdateUserRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        comment:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        is_locked:
+          type: boolean
+    CreateApiTokenRequest:
+      type: object
+      required:
+      - comment
+      properties:
+        comment:
+          type: string
+          description: Description/label for this API token
+    ApiTokenListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              comment:
+                type: string
+              create_time:
+                type: string
+        msg:
+          type: string
+          nullable: true
+    UserListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+    UserResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+    CreateApiTokenResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            token:
+              type: string
+              description: The generated API token value
+            comment:
+              type: string
+            create_time:
+              type: string
+        msg:
+          type: string
+          nullable: true
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

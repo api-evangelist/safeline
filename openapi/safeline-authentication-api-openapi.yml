@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules Authentication API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: Authentication
+  description: Login and session management
+paths:
+  /api/LoginAPI:
+    post:
+      operationId: loginUser
+      summary: Authenticate User
+      description: Authenticates a user with username and password to create a session. Returns user profile including permissions and session configuration.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+    LoginRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+        tfa_token:
+          type: string
+          description: Two-factor authentication token if TFA is enabled
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        is_locked:
+          type: boolean
+        tfa_enabled:
+          type: boolean
+        permissions:
+          type: array
+          items:
+            type: string
+          example:
+          - System Monitor
+          - System Management
+          - User Management
+          - Website And Security Policy Management
+          - Audit Log Management
+        authentication_method:
+          type: string
+          enum:
+          - password
+          - cert
+        session_timeout_time:
+          type: integer
+          description: Session timeout in seconds
+        create_time:
+          type: string
+        last_login_time:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        err:
+          type: string
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

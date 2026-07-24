@@ -1,0 +1,365 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: ACL Rules
+  description: Access control list rules for blocking and allowing traffic
+paths:
+  /api/ACLRuleAPI:
+    get:
+      operationId: listAclRules
+      summary: List ACL Rules
+      description: Retrieves configured access control list rules for blocking or allowing traffic.
+      tags:
+      - ACL Rules
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: ACL rule list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleListResponse'
+    post:
+      operationId: createAclRule
+      summary: Create ACL Rule
+      description: Creates a new access control rule for blocking or allowing specific traffic patterns.
+      tags:
+      - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAclRuleRequest'
+      responses:
+        '200':
+          description: ACL rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleResponse'
+    put:
+      operationId: updateAclRule
+      summary: Update ACL Rule
+      description: Updates an existing access control rule.
+      tags:
+      - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAclRuleRequest'
+      responses:
+        '200':
+          description: ACL rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleResponse'
+    delete:
+      operationId: deleteAclRule
+      summary: Delete ACL Rule
+      description: Deletes an access control rule.
+      tags:
+      - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Rule deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/ACLWhiteListAPI:
+    get:
+      operationId: listAclWhitelist
+      summary: List ACL Whitelist
+      description: Retrieves IP addresses and patterns in the ACL whitelist.
+      tags:
+      - ACL Rules
+      responses:
+        '200':
+          description: Whitelist entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhitelistResponse'
+    post:
+      operationId: addToAclWhitelist
+      summary: Add to ACL Whitelist
+      description: Adds an IP address or CIDR block to the ACL whitelist.
+      tags:
+      - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WhitelistRequest'
+      responses:
+        '200':
+          description: Entry added to whitelist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/ACLRuleExecutionLogAPI:
+    get:
+      operationId: getAclExecutionLogs
+      summary: Get ACL Rule Execution Logs
+      description: Retrieves logs of ACL rule executions showing triggered rules and actions taken.
+      tags:
+      - ACL Rules
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: start_time
+        in: query
+        schema:
+          type: integer
+          description: Unix timestamp for log query start
+      - name: end_time
+        in: query
+        schema:
+          type: integer
+          description: Unix timestamp for log query end
+      responses:
+        '200':
+          description: ACL execution logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogListResponse'
+components:
+  schemas:
+    AclRuleResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/AclRule'
+        msg:
+          type: string
+          nullable: true
+    AclCondition:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - ip
+          - url
+          - method
+          - header
+          - body
+          - user_agent
+          - referer
+        operator:
+          type: string
+          enum:
+          - equals
+          - contains
+          - startswith
+          - endswith
+          - matches
+          - in_cidr
+        value:
+          type: string
+    LogListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              rule_id:
+                type: integer
+              rule_name:
+                type: string
+              action:
+                type: string
+              src_ip:
+                type: string
+              dst_host:
+                type: string
+              request_method:
+                type: string
+              request_url:
+                type: string
+              trigger_time:
+                type: string
+        msg:
+          type: string
+          nullable: true
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    AclRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclRule'
+        msg:
+          type: string
+          nullable: true
+    UpdateAclRuleRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+          enum:
+          - block
+          - allow
+          - log
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+    WhitelistResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              ip:
+                type: string
+              comment:
+                type: string
+        msg:
+          type: string
+          nullable: true
+    CreateAclRuleRequest:
+      type: object
+      required:
+      - name
+      - action
+      - conditions
+      properties:
+        name:
+          type: string
+        action:
+          type: string
+          enum:
+          - block
+          - allow
+          - log
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        comment:
+          type: string
+    WhitelistRequest:
+      type: object
+      required:
+      - ip
+      properties:
+        ip:
+          type: string
+          description: IP address or CIDR block to whitelist
+          example: 192.168.1.0/24
+        comment:
+          type: string
+    AclRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        enabled:
+          type: boolean
+        create_time:
+          type: string
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface

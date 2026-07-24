@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management ACL Rules Websites API
+  description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+- url: https://{host}:9443
+  description: SafeLine Management API (default port 9443)
+  variables:
+    host:
+      default: localhost
+      description: SafeLine management server hostname or IP
+security:
+- APITokenAuth: []
+tags:
+- name: Websites
+  description: Protected website (application) management
+paths:
+  /api/SoftwareReverseProxyWebsiteAPI:
+    get:
+      operationId: listWebsites
+      summary: List Protected Websites
+      description: Retrieves a paginated list of all websites (applications) protected by the SafeLine WAF reverse proxy, including their configuration and protection status.
+      tags:
+      - Websites
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Website list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteListResponse'
+    post:
+      operationId: createWebsite
+      summary: Create Protected Website
+      description: Adds a new website to SafeLine WAF protection with reverse proxy configuration.
+      tags:
+      - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebsiteRequest'
+      responses:
+        '200':
+          description: Website created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteResponse'
+    put:
+      operationId: updateWebsite
+      summary: Update Protected Website
+      description: Updates the configuration of an existing protected website.
+      tags:
+      - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebsiteRequest'
+      responses:
+        '200':
+          description: Website updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteResponse'
+    delete:
+      operationId: deleteWebsite
+      summary: Delete Protected Website
+      description: Removes a website from SafeLine WAF protection.
+      tags:
+      - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Website deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+  /api/EnableDisableWebsiteAPI:
+    post:
+      operationId: toggleWebsiteProtection
+      summary: Enable or Disable Website Protection
+      description: Enables or disables WAF protection for a specific website.
+      tags:
+      - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              - enabled
+              properties:
+                id:
+                  type: integer
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          description: Website protection state updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+components:
+  schemas:
+    CreateWebsiteRequest:
+      type: object
+      required:
+      - name
+      - upstream
+      - ports
+      properties:
+        name:
+          type: string
+          description: Friendly name for the protected website
+        upstream:
+          type: string
+          description: Backend server address (e.g., 192.168.1.100:8080)
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+                enum:
+                - http
+                - https
+        ssl_id:
+          type: integer
+          description: SSL certificate ID for HTTPS
+        policy_group_id:
+          type: integer
+          description: Security policy group ID to apply
+        comment:
+          type: string
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    WebsiteListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+    Website:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        enabled:
+          type: boolean
+        policy_group_id:
+          type: integer
+        ssl_id:
+          type: integer
+        create_time:
+          type: string
+        comment:
+          type: string
+    UpdateWebsiteRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        ssl_id:
+          type: integer
+        policy_group_id:
+          type: integer
+        comment:
+          type: string
+    WebsiteResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface
