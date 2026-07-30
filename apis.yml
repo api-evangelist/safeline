@@ -8,7 +8,20 @@ description: >-
   code protection, and integrates with API gateways including Apache APISIX and Kong. SafeLine exposes a management API
   on port 9443 and supports MCP server implementations for AI-assisted management.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/safeline.png
 tags:
   - Proxy
   - WAF
@@ -21,43 +34,142 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: safeline:safeline
-    name: SafeLine Management API
-    description: >-
-      SafeLine Management API provides programmatic control of the SafeLine WAF including application management,
-      security rule configuration, attack event analysis, IP allowlist/blocklist management, and traffic monitoring. The
-      management API is exposed on port 9443 and supports authentication via API tokens.
-    humanURL: https://waf.chaitin.com/
-    tags:
-      - Proxy
-      - WAF
-      - Security
-      - REST
-      - Open Source
-    properties:
-      - type: Documentation
-        url: https://docs.waf.chaitin.com/
-      - type: GettingStarted
-        url: https://docs.waf.chaitin.com/en/getting-started
-      - type: GitHubRepository
-        url: https://github.com/chaitin/SafeLine
-      - type: OpenAPI
-        url: openapi/safeline-management-openapi.yml
-  - aid: safeline:mcp-server
-    name: SafeLine MCP Server
-    description: >-
-      SafeLine provides two MCP (Model Context Protocol) Server implementations for AI-assisted WAF management: a Python
-      MCP Server for tool-based API management and a Go MCP Server for high-performance management. These servers expose
-      tools for application management, security rule configuration, and attack event analysis.
-    humanURL: https://github.com/chaitin/SafeLine
-    tags:
-      - WAF
-      - MCP
-      - AI
-      - Security
-    properties:
-      - type: GitHubRepository
-        url: https://github.com/chaitin/SafeLine
+- aid: safeline:mcp-server
+  name: SafeLine MCP Server
+  description: >-
+    SafeLine provides two MCP (Model Context Protocol) Server implementations for AI-assisted WAF management:
+    a Python MCP Server for tool-based API management and a Go MCP Server for high-performance management.
+    These servers expose tools for application management, security rule configuration, and attack event
+    analysis.
+  humanURL: https://github.com/chaitin/SafeLine
+  tags:
+  - WAF
+  - MCP
+  - AI
+  - Security
+  properties:
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-acl-rules-api
+  name: SafeLine ACL Rules API
+  description: Access control list rules for blocking and allowing traffic
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - ACL Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-acl-rules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-authentication-api
+  name: SafeLine Authentication API
+  description: Login and session management
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-reports-api
+  name: SafeLine Reports API
+  description: Security report generation and retrieval
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-security-policies-api
+  name: SafeLine Security Policies API
+  description: Security policy and rule group management
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - Security Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-security-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-ssl-certificates-api
+  name: SafeLine SSL Certificates API
+  description: SSL/TLS certificate management
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - SSL Certificates
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-ssl-certificates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-system-api
+  name: SafeLine System API
+  description: System configuration and administration
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-system-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-users-api
+  name: SafeLine Users API
+  description: User account and permission management
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
+- aid: safeline:safeline-websites-api
+  name: SafeLine Websites API
+  description: Protected website (application) management
+  humanURL: https://waf.chaitin.com/
+  tags:
+  - Websites
+  properties:
+  - type: OpenAPI
+    url: openapi/safeline-websites-api-openapi.yml
+  - type: Documentation
+    url: https://docs.waf.chaitin.com/
+  - type: GettingStarted
+    url: https://docs.waf.chaitin.com/en/getting-started
+  - type: GitHubRepository
+    url: https://github.com/chaitin/SafeLine
 common:
   - type: AgenticAccess
     url: agentic-access/safeline-agentic-access.yml
