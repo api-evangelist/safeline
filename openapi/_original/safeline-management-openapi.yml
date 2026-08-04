@@ -1,0 +1,1420 @@
+openapi: 3.1.0
+info:
+  title: SafeLine Management API
+  description: >-
+    SafeLine Management API provides programmatic control of the SafeLine WAF
+    (Web Application Firewall) including application/website management,
+    security policy configuration, ACL rules, SSL certificate management,
+    user account management, attack event analysis, and system configuration.
+    SafeLine is an open-source self-hosted WAF built by Chaitin Technology
+    protecting over 1 million websites with over 30 billion daily HTTP requests.
+  version: 2.0.0
+  contact:
+    name: Chaitin Technology
+    url: https://waf.chaitin.com/
+  license:
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
+servers:
+  - url: https://{host}:9443
+    description: SafeLine Management API (default port 9443)
+    variables:
+      host:
+        default: localhost
+        description: SafeLine management server hostname or IP
+
+security:
+  - APITokenAuth: []
+
+tags:
+  - name: Authentication
+    description: Login and session management
+  - name: Users
+    description: User account and permission management
+  - name: Websites
+    description: Protected website (application) management
+  - name: SSL Certificates
+    description: SSL/TLS certificate management
+  - name: ACL Rules
+    description: Access control list rules for blocking and allowing traffic
+  - name: Security Policies
+    description: Security policy and rule group management
+  - name: Reports
+    description: Security report generation and retrieval
+  - name: System
+    description: System configuration and administration
+
+paths:
+  /api/LoginAPI:
+    post:
+      operationId: loginUser
+      summary: Authenticate User
+      description: >-
+        Authenticates a user with username and password to create a session.
+        Returns user profile including permissions and session configuration.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/UserAPITokenAPI:
+    get:
+      operationId: listApiTokens
+      summary: List API Tokens
+      description: Retrieves all API tokens for the authenticated user.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: List of API tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiTokenListResponse'
+    post:
+      operationId: createApiToken
+      summary: Create API Token
+      description: Creates a new API token for programmatic access to the SafeLine management API.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiTokenRequest'
+      responses:
+        '200':
+          description: API token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApiTokenResponse'
+    delete:
+      operationId: deleteApiToken
+      summary: Delete API Token
+      description: Deletes an existing API token by ID.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Token deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/UserAPI:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Retrieves a paginated list of user accounts.
+      tags:
+        - Users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Creates a new user account with specified permissions.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates an existing user account configuration.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Deletes a user account.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/SoftwareReverseProxyWebsiteAPI:
+    get:
+      operationId: listWebsites
+      summary: List Protected Websites
+      description: >-
+        Retrieves a paginated list of all websites (applications) protected by
+        the SafeLine WAF reverse proxy, including their configuration and
+        protection status.
+      tags:
+        - Websites
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Website list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteListResponse'
+    post:
+      operationId: createWebsite
+      summary: Create Protected Website
+      description: Adds a new website to SafeLine WAF protection with reverse proxy configuration.
+      tags:
+        - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebsiteRequest'
+      responses:
+        '200':
+          description: Website created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteResponse'
+    put:
+      operationId: updateWebsite
+      summary: Update Protected Website
+      description: Updates the configuration of an existing protected website.
+      tags:
+        - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebsiteRequest'
+      responses:
+        '200':
+          description: Website updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteResponse'
+    delete:
+      operationId: deleteWebsite
+      summary: Delete Protected Website
+      description: Removes a website from SafeLine WAF protection.
+      tags:
+        - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Website deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/EnableDisableWebsiteAPI:
+    post:
+      operationId: toggleWebsiteProtection
+      summary: Enable or Disable Website Protection
+      description: Enables or disables WAF protection for a specific website.
+      tags:
+        - Websites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - enabled
+              properties:
+                id:
+                  type: integer
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          description: Website protection state updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/CertAPI:
+    get:
+      operationId: listSslCertificates
+      summary: List SSL Certificates
+      description: Retrieves all SSL/TLS certificates configured in SafeLine.
+      tags:
+        - SSL Certificates
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Certificate list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateListResponse'
+    delete:
+      operationId: deleteSslCertificate
+      summary: Delete SSL Certificate
+      description: Deletes an SSL certificate from SafeLine.
+      tags:
+        - SSL Certificates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Certificate deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/UploadSSLCertAPI:
+    post:
+      operationId: uploadSslCertificate
+      summary: Upload SSL Certificate
+      description: Uploads an SSL/TLS certificate and private key for use with protected websites.
+      tags:
+        - SSL Certificates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                crt_file:
+                  type: string
+                  format: binary
+                  description: Certificate file (PEM format)
+                key_file:
+                  type: string
+                  format: binary
+                  description: Private key file (PEM format)
+                name:
+                  type: string
+                  description: Certificate name (optional, defaults to domain names)
+                id:
+                  type: integer
+                  description: Certificate ID for updates (optional)
+      responses:
+        '200':
+          description: Certificate uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateResponse'
+
+  /api/ACLRuleAPI:
+    get:
+      operationId: listAclRules
+      summary: List ACL Rules
+      description: Retrieves configured access control list rules for blocking or allowing traffic.
+      tags:
+        - ACL Rules
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: ACL rule list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleListResponse'
+    post:
+      operationId: createAclRule
+      summary: Create ACL Rule
+      description: Creates a new access control rule for blocking or allowing specific traffic patterns.
+      tags:
+        - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAclRuleRequest'
+      responses:
+        '200':
+          description: ACL rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleResponse'
+    put:
+      operationId: updateAclRule
+      summary: Update ACL Rule
+      description: Updates an existing access control rule.
+      tags:
+        - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAclRuleRequest'
+      responses:
+        '200':
+          description: ACL rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AclRuleResponse'
+    delete:
+      operationId: deleteAclRule
+      summary: Delete ACL Rule
+      description: Deletes an access control rule.
+      tags:
+        - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Rule deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/ACLWhiteListAPI:
+    get:
+      operationId: listAclWhitelist
+      summary: List ACL Whitelist
+      description: Retrieves IP addresses and patterns in the ACL whitelist.
+      tags:
+        - ACL Rules
+      responses:
+        '200':
+          description: Whitelist entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhitelistResponse'
+    post:
+      operationId: addToAclWhitelist
+      summary: Add to ACL Whitelist
+      description: Adds an IP address or CIDR block to the ACL whitelist.
+      tags:
+        - ACL Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WhitelistRequest'
+      responses:
+        '200':
+          description: Entry added to whitelist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/PolicyGroupAPI:
+    get:
+      operationId: listPolicyGroups
+      summary: List Policy Groups
+      description: Retrieves security policy groups configured in SafeLine.
+      tags:
+        - Security Policies
+      responses:
+        '200':
+          description: Policy group list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyGroupListResponse'
+    post:
+      operationId: createPolicyGroup
+      summary: Create Policy Group
+      description: Creates a new security policy group with custom rules.
+      tags:
+        - Security Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyGroupRequest'
+      responses:
+        '200':
+          description: Policy group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyGroupResponse'
+
+  /api/PolicyRuleAPI:
+    get:
+      operationId: listPolicyRules
+      summary: List Policy Rules
+      description: Retrieves security policy rules within policy groups.
+      tags:
+        - Security Policies
+      parameters:
+        - name: group_id
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Policy rule list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyRuleListResponse'
+
+  /api/ReportResultAPI:
+    get:
+      operationId: getReportResults
+      summary: Get Security Reports
+      description: Retrieves generated security reports including attack statistics and traffic analysis.
+      tags:
+        - Reports
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Report results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListResponse'
+
+  /api/ManualGenerateReportAPI:
+    post:
+      operationId: generateReport
+      summary: Generate Security Report
+      description: Triggers manual generation of a security report.
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReportRequest'
+      responses:
+        '200':
+          description: Report generation triggered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/NodeInfoAPI:
+    get:
+      operationId: getNodeInfo
+      summary: Get Node Information
+      description: Retrieves system node information including hardware stats and cluster status.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Node information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeInfoResponse'
+
+  /api/LicenseAPI:
+    get:
+      operationId: getLicenseInfo
+      summary: Get License Information
+      description: Retrieves current SafeLine license information and feature entitlements.
+      tags:
+        - System
+      responses:
+        '200':
+          description: License information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseResponse'
+
+  /api/ACLRuleExecutionLogAPI:
+    get:
+      operationId: getAclExecutionLogs
+      summary: Get ACL Rule Execution Logs
+      description: Retrieves logs of ACL rule executions showing triggered rules and actions taken.
+      tags:
+        - ACL Rules
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: start_time
+          in: query
+          schema:
+            type: integer
+            description: Unix timestamp for log query start
+        - name: end_time
+          in: query
+          schema:
+            type: integer
+            description: Unix timestamp for log query end
+      responses:
+        '200':
+          description: ACL execution logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogListResponse'
+
+components:
+  securitySchemes:
+    APITokenAuth:
+      type: apiKey
+      in: header
+      name: X-SLCE-API-Token
+      description: API token obtained from the SafeLine management interface
+
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+        tfa_token:
+          type: string
+          description: Two-factor authentication token if TFA is enabled
+
+    LoginResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        is_locked:
+          type: boolean
+        tfa_enabled:
+          type: boolean
+        permissions:
+          type: array
+          items:
+            type: string
+          example:
+            - System Monitor
+            - System Management
+            - User Management
+            - Website And Security Policy Management
+            - Audit Log Management
+        authentication_method:
+          type: string
+          enum: [password, cert]
+        session_timeout_time:
+          type: integer
+          description: Session timeout in seconds
+        create_time:
+          type: string
+        last_login_time:
+          type: string
+
+    CreateApiTokenRequest:
+      type: object
+      required:
+        - comment
+      properties:
+        comment:
+          type: string
+          description: Description/label for this API token
+
+    CreateApiTokenResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            token:
+              type: string
+              description: The generated API token value
+            comment:
+              type: string
+            create_time:
+              type: string
+        msg:
+          type: string
+          nullable: true
+
+    ApiTokenListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              comment:
+                type: string
+              create_time:
+                type: string
+        msg:
+          type: string
+          nullable: true
+
+    CreateUserRequest:
+      type: object
+      required:
+        - username
+        - password
+        - permissions
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        comment:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    UpdateUserRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        comment:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        is_locked:
+          type: boolean
+
+    UserResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+
+    UserListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+
+    CreateWebsiteRequest:
+      type: object
+      required:
+        - name
+        - upstream
+        - ports
+      properties:
+        name:
+          type: string
+          description: Friendly name for the protected website
+        upstream:
+          type: string
+          description: Backend server address (e.g., 192.168.1.100:8080)
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+                enum: [http, https]
+        ssl_id:
+          type: integer
+          description: SSL certificate ID for HTTPS
+        policy_group_id:
+          type: integer
+          description: Security policy group ID to apply
+        comment:
+          type: string
+
+    UpdateWebsiteRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        ssl_id:
+          type: integer
+        policy_group_id:
+          type: integer
+        comment:
+          type: string
+
+    WebsiteResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+
+    WebsiteListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+
+    Website:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        enabled:
+          type: boolean
+        policy_group_id:
+          type: integer
+        ssl_id:
+          type: integer
+        create_time:
+          type: string
+        comment:
+          type: string
+
+    CertificateListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+
+    CertificateResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+
+    Certificate:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        websites:
+          type: array
+          items:
+            type: integer
+        signature:
+          type: string
+        info:
+          type: object
+          properties:
+            serial:
+              type: string
+            issuer:
+              type: string
+            domains:
+              type: array
+              items:
+                type: string
+            not_valid_before:
+              type: number
+            not_valid_after:
+              type: number
+        create_time:
+          type: string
+
+    CreateAclRuleRequest:
+      type: object
+      required:
+        - name
+        - action
+        - conditions
+      properties:
+        name:
+          type: string
+        action:
+          type: string
+          enum: [block, allow, log]
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        comment:
+          type: string
+
+    UpdateAclRuleRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+          enum: [block, allow, log]
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+
+    AclCondition:
+      type: object
+      properties:
+        field:
+          type: string
+          enum: [ip, url, method, header, body, user_agent, referer]
+        operator:
+          type: string
+          enum: [equals, contains, startswith, endswith, matches, in_cidr]
+        value:
+          type: string
+
+    AclRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclRule'
+        msg:
+          type: string
+          nullable: true
+
+    AclRuleResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/AclRule'
+        msg:
+          type: string
+          nullable: true
+
+    AclRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        enabled:
+          type: boolean
+        create_time:
+          type: string
+
+    WhitelistRequest:
+      type: object
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          description: IP address or CIDR block to whitelist
+          example: "192.168.1.0/24"
+        comment:
+          type: string
+
+    WhitelistResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              ip:
+                type: string
+              comment:
+                type: string
+        msg:
+          type: string
+          nullable: true
+
+    CreatePolicyGroupRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
+
+    PolicyGroupResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+
+    PolicyGroupListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+
+    PolicyGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        comment:
+          type: string
+        rule_count:
+          type: integer
+        create_time:
+          type: string
+
+    PolicyRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyRule'
+        msg:
+          type: string
+          nullable: true
+
+    PolicyRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        priority:
+          type: integer
+        enabled:
+          type: boolean
+        group_id:
+          type: integer
+
+    GenerateReportRequest:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
+
+    ReportListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+        msg:
+          type: string
+          nullable: true
+
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+        create_time:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        status:
+          type: string
+          enum: [pending, completed, failed]
+        download_url:
+          type: string
+
+    NodeInfoResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            hostname:
+              type: string
+            version:
+              type: string
+            cpu_usage:
+              type: number
+            memory_total:
+              type: integer
+            memory_used:
+              type: integer
+            disk_total:
+              type: integer
+            disk_used:
+              type: integer
+            uptime:
+              type: integer
+        msg:
+          type: string
+          nullable: true
+
+    LicenseResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [community, professional, enterprise]
+            expires_at:
+              type: string
+              nullable: true
+            features:
+              type: array
+              items:
+                type: string
+        msg:
+          type: string
+          nullable: true
+
+    LogListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              rule_id:
+                type: integer
+              rule_name:
+                type: string
+              action:
+                type: string
+              src_ip:
+                type: string
+              dst_host:
+                type: string
+              request_method:
+                type: string
+              request_url:
+                type: string
+              trigger_time:
+                type: string
+        msg:
+          type: string
+          nullable: true
+
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+
+    ErrorResponse:
+      type: object
+      properties:
+        err:
+          type: string
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true

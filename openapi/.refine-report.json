@@ -1,0 +1,28 @@
+{
+  "provider": "safeline",
+  "sources": [
+    "safeline-acl-rules-api-openapi.yml",
+    "safeline-authentication-api-openapi.yml",
+    "safeline-reports-api-openapi.yml",
+    "safeline-security-policies-api-openapi.yml",
+    "safeline-ssl-certificates-api-openapi.yml",
+    "safeline-system-api-openapi.yml",
+    "safeline-users-api-openapi.yml",
+    "safeline-websites-api-openapi.yml"
+  ],
+  "outputs": [
+    "safeline-acl-rules-api-openapi.yml",
+    "safeline-authentication-api-openapi.yml",
+    "safeline-reports-api-openapi.yml",
+    "safeline-security-policies-api-openapi.yml",
+    "safeline-ssl-certificates-api-openapi.yml",
+    "safeline-system-api-openapi.yml",
+    "safeline-users-api-openapi.yml",
+    "safeline-websites-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
