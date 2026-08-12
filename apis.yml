@@ -171,6 +171,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/chaitin/SafeLine
 common:
+  - type: License
+    name: GPL-3.0
+    url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/safeline-agentic-access.yml
   - type: DomainSecurity
@@ -186,7 +189,7 @@ common:
   - type: Demo
     url: https://demo.waf.chaitin.com/
   - type: OpenAPI
-    url: openapi/safeline-management-openapi.yml
+    url: openapi/_original/safeline-management-openapi.yml
   - type: SpectralRules
     url: rules/safeline-rules.yml
   - type: JSONSchema
@@ -201,8 +204,6 @@ common:
     url: json-ld/safeline-context.jsonld
   - type: Vocabulary
     url: vocabulary/safeline-vocabulary.yml
-  - type: Capabilities
-    url: capabilities/waf-protection-management.yaml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
