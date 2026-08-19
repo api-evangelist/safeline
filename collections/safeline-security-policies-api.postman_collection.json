@@ -1,0 +1,372 @@
+{
+  "item": [
+    {
+      "id": "495e092b-ae11-4462-8e58-3e41c89d4fc9",
+      "name": "Security Policies",
+      "description": {
+        "content": "Security policy and rule group management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f0fdfa7-efaa-42d1-aec1-eae7e672564f",
+          "name": "List Policy Groups",
+          "request": {
+            "name": "List Policy Groups",
+            "description": {
+              "content": "Retrieves security policy groups configured in SafeLine.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "PolicyGroupAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f29fa0a-da16-4dcf-8f6e-80e6c7b4a4f6",
+              "name": "Policy group list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "PolicyGroupAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 4453,\n      \"name\": \"string\",\n      \"comment\": \"string\",\n      \"rule_count\": 8099,\n      \"create_time\": \"string\"\n    },\n    {\n      \"id\": 4687,\n      \"name\": \"string\",\n      \"comment\": \"string\",\n      \"rule_count\": 917,\n      \"create_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d16e2ce-fee3-47b7-b535-006412f689c8",
+          "name": "Create Policy Group",
+          "request": {
+            "name": "Create Policy Group",
+            "description": {
+              "content": "Creates a new security policy group with custom rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "PolicyGroupAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eadd2477-3b07-4bc5-9497-5a7d7de64759",
+              "name": "Policy group created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "PolicyGroupAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 9237,\n    \"name\": \"string\",\n    \"comment\": \"string\",\n    \"rule_count\": 3829,\n    \"create_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c367acf6-852f-4527-8b1d-0e8c1158cdd8",
+          "name": "List Policy Rules",
+          "request": {
+            "name": "List Policy Rules",
+            "description": {
+              "content": "Retrieves security policy rules within policy groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "PolicyRuleAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "group_id",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a85d41d3-8125-4cec-9947-dc503d8720eb",
+              "name": "Policy rule list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "PolicyRuleAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "group_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 6406,\n      \"name\": \"string\",\n      \"action\": \"string\",\n      \"priority\": 7872,\n      \"enabled\": true,\n      \"group_id\": 3385\n    },\n    {\n      \"id\": 2918,\n      \"name\": \"string\",\n      \"action\": \"string\",\n      \"priority\": 5658,\n      \"enabled\": true,\n      \"group_id\": 7315\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21817f8e-acb2-4379-9d34-876d32e289f4",
+    "name": "SafeLine Management ACL Rules Security Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

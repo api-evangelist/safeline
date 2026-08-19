@@ -1,0 +1,232 @@
+{
+  "item": [
+    {
+      "id": "00ecdbc9-a171-487f-9751-ac98620a1288",
+      "name": "Authentication",
+      "description": {
+        "content": "Login and session management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3e919eb-a525-40d7-ab06-b9d5820b279f",
+          "name": "Authenticate User",
+          "request": {
+            "name": "Authenticate User",
+            "description": {
+              "content": "Authenticates a user with username and password to create a session. Returns user profile including permissions and session configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "LoginAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<password>\",\n  \"tfa_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7dcfdfb-3f9a-49c7-91be-9a576be97af4",
+              "name": "Login successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "LoginAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"<password>\",\n  \"tfa_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 3696,\n    \"username\": \"string\",\n    \"is_locked\": true,\n    \"tfa_enabled\": true,\n    \"permissions\": [\n      \"System Monitor\",\n      \"System Management\",\n      \"User Management\",\n      \"Website And Security Policy Management\",\n      \"Audit Log Management\"\n    ],\n    \"authentication_method\": \"password\",\n    \"session_timeout_time\": 5893,\n    \"create_time\": \"string\",\n    \"last_login_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fef532d-93f8-4b0f-a425-6394b58dee24",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "LoginAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"<password>\",\n  \"tfa_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c75681d-6036-4090-9149-9766a7f27074",
+    "name": "SafeLine Management ACL Rules Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

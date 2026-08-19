@@ -1,0 +1,452 @@
+{
+  "item": [
+    {
+      "id": "e53a558e-2966-4d7a-994e-29f9916eb04e",
+      "name": "SSL Certificates",
+      "description": {
+        "content": "SSL/TLS certificate management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e06cda2d-b8db-4a7b-99cf-6867f8e3c48c",
+          "name": "List SSL Certificates",
+          "request": {
+            "name": "List SSL Certificates",
+            "description": {
+              "content": "Retrieves all SSL/TLS certificates configured in SafeLine.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "CertAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f873f4b8-cbf2-4906-960a-dbe4e12cb757",
+              "name": "Certificate list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "CertAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 2363,\n      \"name\": \"string\",\n      \"websites\": [\n        8095,\n        8415\n      ],\n      \"signature\": \"string\",\n      \"info\": {\n        \"serial\": \"string\",\n        \"issuer\": \"string\",\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ],\n        \"not_valid_before\": 5257.44591562499,\n        \"not_valid_after\": 4326.490126943106\n      },\n      \"create_time\": \"string\"\n    },\n    {\n      \"id\": 7589,\n      \"name\": \"string\",\n      \"websites\": [\n        7350,\n        6295\n      ],\n      \"signature\": \"string\",\n      \"info\": {\n        \"serial\": \"string\",\n        \"issuer\": \"string\",\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ],\n        \"not_valid_before\": 5032.240041014921,\n        \"not_valid_after\": 3391.555109410124\n      },\n      \"create_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40474513-194b-414c-878f-680eef700dd2",
+          "name": "Delete SSL Certificate",
+          "request": {
+            "name": "Delete SSL Certificate",
+            "description": {
+              "content": "Deletes an SSL certificate from SafeLine.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "CertAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee8c6f8e-b35e-409d-9ed8-613dc4712e9d",
+              "name": "Certificate deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "CertAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "353b1fbc-86dc-431d-b177-725baea76b1c",
+          "name": "Upload SSL Certificate",
+          "request": {
+            "name": "Upload SSL Certificate",
+            "description": {
+              "content": "Uploads an SSL/TLS certificate and private key for use with protected websites.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UploadSSLCertAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "crt_file",
+                  "type": "file",
+                  "description": "Certificate file (PEM format)"
+                },
+                {
+                  "key": "key_file",
+                  "type": "file",
+                  "description": "Private key file (PEM format)"
+                },
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Certificate name (optional, defaults to domain names)"
+                },
+                {
+                  "key": "id",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Certificate ID for updates (optional)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a0d8e0d-e517-4ce9-836b-9a8c34dccb88",
+              "name": "Certificate uploaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UploadSSLCertAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Certificate file (PEM format)",
+                        "type": "text/plain"
+                      },
+                      "key": "crt_file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Private key file (PEM format)",
+                        "type": "text/plain"
+                      },
+                      "key": "key_file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Certificate name (optional, defaults to domain names)",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Certificate ID for updates (optional)",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 3030,\n    \"name\": \"string\",\n    \"websites\": [\n      8622,\n      3425\n    ],\n    \"signature\": \"string\",\n    \"info\": {\n      \"serial\": \"string\",\n      \"issuer\": \"string\",\n      \"domains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_valid_before\": 5834.135126250741,\n      \"not_valid_after\": 7378.5677022514665\n    },\n    \"create_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "916069e2-6cb1-4425-87f5-2b0be4921b35",
+    "name": "SafeLine Management ACL Rules SSL Certificates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

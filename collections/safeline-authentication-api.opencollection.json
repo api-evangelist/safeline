@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management ACL Rules Authentication API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/LoginAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user with username and password to create a session. Returns user profile including permissions and session configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

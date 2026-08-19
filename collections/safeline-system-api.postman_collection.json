@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "adda42f5-ae01-4f70-8aef-b20932ce03c1",
+      "name": "System",
+      "description": {
+        "content": "System configuration and administration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b05831b1-66be-45bd-957f-cd0bd98b3e8a",
+          "name": "Get Node Information",
+          "request": {
+            "name": "Get Node Information",
+            "description": {
+              "content": "Retrieves system node information including hardware stats and cluster status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "NodeInfoAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6060f23-d12d-4e26-9bf7-7707d2d2d94b",
+              "name": "Node information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "NodeInfoAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"hostname\": \"string\",\n    \"version\": \"string\",\n    \"cpu_usage\": 3419.414418767092,\n    \"memory_total\": 4814,\n    \"memory_used\": 7912,\n    \"disk_total\": 377,\n    \"disk_used\": 8514,\n    \"uptime\": 8181\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b01aace8-eedc-43ff-a3d1-674d46755601",
+          "name": "Get License Information",
+          "request": {
+            "name": "Get License Information",
+            "description": {
+              "content": "Retrieves current SafeLine license information and feature entitlements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "LicenseAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c929260d-a45a-451d-a1b9-aea9374cd04b",
+              "name": "License information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "LicenseAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"type\": \"community\",\n    \"expires_at\": \"string\",\n    \"features\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5584e7da-d9c0-49a3-bef1-fc98418e03ef",
+    "name": "SafeLine Management ACL Rules System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

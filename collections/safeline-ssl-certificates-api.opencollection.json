@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management ACL Rules SSL Certificates API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSL Certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SSL Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/CertAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all SSL/TLS certificates configured in SafeLine."
+        },
+        {
+          "info": {
+            "name": "Delete SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/CertAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an SSL certificate from SafeLine."
+        },
+        {
+          "info": {
+            "name": "Upload SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/UploadSSLCertAPI",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "crt_file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "key_file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "id",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads an SSL/TLS certificate and private key for use with protected websites."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,841 @@
+{
+  "item": [
+    {
+      "id": "3071e64c-50eb-4a64-8743-083f75ee163d",
+      "name": "Users",
+      "description": {
+        "content": "User account and permission management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4ac31b7-fc1d-40e6-9bcd-29ad36b1432b",
+          "name": "List API Tokens",
+          "request": {
+            "name": "List API Tokens",
+            "description": {
+              "content": "Retrieves all API tokens for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPITokenAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5496b6b0-31b3-40f0-b4f4-a6ac6b5c562b",
+              "name": "List of API tokens",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPITokenAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 1781,\n      \"comment\": \"string\",\n      \"create_time\": \"string\"\n    },\n    {\n      \"id\": 7018,\n      \"comment\": \"string\",\n      \"create_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c04d7795-1a86-4ad6-9423-eab4f75a80f7",
+          "name": "Create API Token",
+          "request": {
+            "name": "Create API Token",
+            "description": {
+              "content": "Creates a new API token for programmatic access to the SafeLine management API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPITokenAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53238a54-5c89-4c4c-b0f7-8a25ce5a3327",
+              "name": "API token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPITokenAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 8313,\n    \"token\": \"string\",\n    \"comment\": \"string\",\n    \"create_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2f30786-9c45-4387-83f2-1d9a87cdfd06",
+          "name": "Delete API Token",
+          "request": {
+            "name": "Delete API Token",
+            "description": {
+              "content": "Deletes an existing API token by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPITokenAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9e8a05a-3ff2-4b79-9b90-613413344ad8",
+              "name": "Token deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPITokenAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f21e033-ecd1-4520-b351-2269f60e2614",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {
+              "content": "Retrieves a paginated list of user accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c7431b7-34b3-417f-9009-2ed48311ef5d",
+              "name": "User list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 7860,\n      \"username\": \"string\",\n      \"is_locked\": true,\n      \"tfa_enabled\": true,\n      \"permissions\": [\n        \"System Monitor\",\n        \"System Management\",\n        \"User Management\",\n        \"Website And Security Policy Management\",\n        \"Audit Log Management\"\n      ],\n      \"authentication_method\": \"cert\",\n      \"session_timeout_time\": 5124,\n      \"create_time\": \"string\",\n      \"last_login_time\": \"string\"\n    },\n    {\n      \"id\": 260,\n      \"username\": \"string\",\n      \"is_locked\": true,\n      \"tfa_enabled\": true,\n      \"permissions\": [\n        \"System Monitor\",\n        \"System Management\",\n        \"User Management\",\n        \"Website And Security Policy Management\",\n        \"Audit Log Management\"\n      ],\n      \"authentication_method\": \"password\",\n      \"session_timeout_time\": 2139,\n      \"create_time\": \"string\",\n      \"last_login_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad3fd30a-85a3-49d9-b9e8-d1150e6dbe2f",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Creates a new user account with specified permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "437220fd-c71d-40f9-ae1d-ebb60ee3c6f0",
+              "name": "User created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 2048,\n    \"username\": \"string\",\n    \"is_locked\": false,\n    \"tfa_enabled\": false,\n    \"permissions\": [\n      \"System Monitor\",\n      \"System Management\",\n      \"User Management\",\n      \"Website And Security Policy Management\",\n      \"Audit Log Management\"\n    ],\n    \"authentication_method\": \"password\",\n    \"session_timeout_time\": 7860,\n    \"create_time\": \"string\",\n    \"last_login_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d1c7b40-c434-4720-9687-b1c9d08dc67f",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Updates an existing user account configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_locked\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db3feade-be70-4134-8c3e-b1b5ffe80bd1",
+              "name": "User updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_locked\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 2048,\n    \"username\": \"string\",\n    \"is_locked\": false,\n    \"tfa_enabled\": false,\n    \"permissions\": [\n      \"System Monitor\",\n      \"System Management\",\n      \"User Management\",\n      \"Website And Security Policy Management\",\n      \"Audit Log Management\"\n    ],\n    \"authentication_method\": \"password\",\n    \"session_timeout_time\": 7860,\n    \"create_time\": \"string\",\n    \"last_login_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62525c8f-f054-41e8-9413-286337bf7546",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "Deletes a user account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "UserAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d812e1f-ceaf-465b-8de6-0137e9cff8a1",
+              "name": "User deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "UserAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8ed2ec37-4e28-41f5-8422-cc53089383ba",
+    "name": "SafeLine Management ACL Rules Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,858 @@
+{
+  "item": [
+    {
+      "id": "4d6488ff-f544-4dbd-91bc-fe7bf11eb6c3",
+      "name": "ACL Rules",
+      "description": {
+        "content": "Access control list rules for blocking and allowing traffic",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a11d5605-af5a-495b-8dce-929ca116d40a",
+          "name": "List ACL Rules",
+          "request": {
+            "name": "List ACL Rules",
+            "description": {
+              "content": "Retrieves configured access control list rules for blocking or allowing traffic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLRuleAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a17d3556-b401-4b26-a008-8ebc0d0d86f7",
+              "name": "ACL rule list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLRuleAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 6106,\n      \"name\": \"string\",\n      \"action\": \"string\",\n      \"conditions\": [\n        {\n          \"field\": \"referer\",\n          \"operator\": \"endswith\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"header\",\n          \"operator\": \"equals\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"create_time\": \"string\"\n    },\n    {\n      \"id\": 9109,\n      \"name\": \"string\",\n      \"action\": \"string\",\n      \"conditions\": [\n        {\n          \"field\": \"header\",\n          \"operator\": \"startswith\",\n          \"value\": \"string\"\n        },\n        {\n          \"field\": \"method\",\n          \"operator\": \"equals\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"create_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e45b57b1-0917-4618-af1d-102f3fb917ee",
+          "name": "Create ACL Rule",
+          "request": {
+            "name": "Create ACL Rule",
+            "description": {
+              "content": "Creates a new access control rule for blocking or allowing specific traffic patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLRuleAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3fa7ed9-f11f-48b6-b55f-8eea2bf5533f",
+              "name": "ACL rule created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLRuleAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"conditions\": [\n    {\n      \"field\": \"user_agent\",\n      \"operator\": \"equals\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"ip\",\n      \"operator\": \"endswith\",\n      \"value\": \"string\"\n    }\n  ],\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 7617,\n    \"name\": \"string\",\n    \"action\": \"string\",\n    \"conditions\": [\n      {\n        \"field\": \"url\",\n        \"operator\": \"equals\",\n        \"value\": \"string\"\n      },\n      {\n        \"field\": \"url\",\n        \"operator\": \"startswith\",\n        \"value\": \"string\"\n      }\n    ],\n    \"enabled\": false,\n    \"create_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a53655c6-e550-4291-a2bf-5c207570fbf0",
+          "name": "Update ACL Rule",
+          "request": {
+            "name": "Update ACL Rule",
+            "description": {
+              "content": "Updates an existing access control rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLRuleAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"conditions\": [\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"operator\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f18a0e33-7069-4b75-b9d5-2f8b0b8ba445",
+              "name": "ACL rule updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLRuleAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"action\": \"<string>\",\n  \"conditions\": [\n    {\n      \"field\": \"body\",\n      \"operator\": \"startswith\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"referer\",\n      \"operator\": \"startswith\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 7617,\n    \"name\": \"string\",\n    \"action\": \"string\",\n    \"conditions\": [\n      {\n        \"field\": \"url\",\n        \"operator\": \"equals\",\n        \"value\": \"string\"\n      },\n      {\n        \"field\": \"url\",\n        \"operator\": \"startswith\",\n        \"value\": \"string\"\n      }\n    ],\n    \"enabled\": false,\n    \"create_time\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7eb0350e-81a3-45ea-8fc6-a1211024edd5",
+          "name": "Delete ACL Rule",
+          "request": {
+            "name": "Delete ACL Rule",
+            "description": {
+              "content": "Deletes an access control rule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLRuleAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec92fd05-b887-45e9-b3e8-20ccde1f72c6",
+              "name": "Rule deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLRuleAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50694936-03c4-4e36-ac95-68a5b8c4f483",
+          "name": "List ACL Whitelist",
+          "request": {
+            "name": "List ACL Whitelist",
+            "description": {
+              "content": "Retrieves IP addresses and patterns in the ACL whitelist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLWhiteListAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b5a78ba-44d9-4bd3-86ea-9e77f434ef4c",
+              "name": "Whitelist entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLWhiteListAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 4141,\n      \"ip\": \"string\",\n      \"comment\": \"string\"\n    },\n    {\n      \"id\": 4624,\n      \"ip\": \"string\",\n      \"comment\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f71ee09-a06d-49a9-8f62-de3105e15832",
+          "name": "Add to ACL Whitelist",
+          "request": {
+            "name": "Add to ACL Whitelist",
+            "description": {
+              "content": "Adds an IP address or CIDR block to the ACL whitelist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLWhiteListAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ip\": \"<string>\",\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1540d7ad-88cf-4fa3-8810-8f23ce6f2693",
+              "name": "Entry added to whitelist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLWhiteListAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ip\": \"192.168.1.0/24\",\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f531c69-772c-4db4-aebf-b20a83550f36",
+          "name": "Get ACL Rule Execution Logs",
+          "request": {
+            "name": "Get ACL Rule Execution Logs",
+            "description": {
+              "content": "Retrieves logs of ACL rule executions showing triggered rules and actions taken.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ACLRuleExecutionLogAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0158bcd-2198-4346-b843-3e39f03b98d0",
+              "name": "ACL execution logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ACLRuleExecutionLogAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 6825,\n      \"rule_id\": 1547,\n      \"rule_name\": \"string\",\n      \"action\": \"string\",\n      \"src_ip\": \"string\",\n      \"dst_host\": \"string\",\n      \"request_method\": \"string\",\n      \"request_url\": \"string\",\n      \"trigger_time\": \"string\"\n    },\n    {\n      \"id\": 4374,\n      \"rule_id\": 1101,\n      \"rule_name\": \"string\",\n      \"action\": \"string\",\n      \"src_ip\": \"string\",\n      \"dst_host\": \"string\",\n      \"request_method\": \"string\",\n      \"request_url\": \"string\",\n      \"trigger_time\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9cf83053-f8d2-4c0d-8304-f15503b2d696",
+    "name": "SafeLine Management ACL Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

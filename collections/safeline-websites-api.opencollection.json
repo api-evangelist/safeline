@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management ACL Rules Websites API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Websites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Protected Websites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of all websites (applications) protected by the SafeLine WAF reverse proxy, including their configuration and protection status."
+        },
+        {
+          "info": {
+            "name": "Create Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new website to SafeLine WAF protection with reverse proxy configuration."
+        },
+        {
+          "info": {
+            "name": "Update Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing protected website."
+        },
+        {
+          "info": {
+            "name": "Delete Protected Website",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/SoftwareReverseProxyWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes a website from SafeLine WAF protection."
+        },
+        {
+          "info": {
+            "name": "Enable or Disable Website Protection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/EnableDisableWebsiteAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables or disables WAF protection for a specific website."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management ACL Rules System API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Node Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/NodeInfoAPI"
+          },
+          "docs": "Retrieves system node information including hardware stats and cluster status."
+        },
+        {
+          "info": {
+            "name": "Get License Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/LicenseAPI"
+          },
+          "docs": "Retrieves current SafeLine license information and feature entitlements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

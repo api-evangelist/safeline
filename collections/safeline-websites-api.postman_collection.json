@@ -1,0 +1,632 @@
+{
+  "item": [
+    {
+      "id": "40b1ddcf-679c-42dc-98e4-e6460750268a",
+      "name": "Websites",
+      "description": {
+        "content": "Protected website (application) management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a639a83-57b1-4f44-8bdd-aa0c9b9b8954",
+          "name": "List Protected Websites",
+          "request": {
+            "name": "List Protected Websites",
+            "description": {
+              "content": "Retrieves a paginated list of all websites (applications) protected by the SafeLine WAF reverse proxy, including their configuration and protection status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "SoftwareReverseProxyWebsiteAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63a41350-7f76-400c-a11c-788f430c8041",
+              "name": "Website list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "SoftwareReverseProxyWebsiteAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": [\n    {\n      \"id\": 7616,\n      \"name\": \"string\",\n      \"upstream\": \"string\",\n      \"ports\": [\n        {\n          \"port\": 9526,\n          \"protocol\": \"string\"\n        },\n        {\n          \"port\": 1389,\n          \"protocol\": \"string\"\n        }\n      ],\n      \"enabled\": false,\n      \"policy_group_id\": 326,\n      \"ssl_id\": 2762,\n      \"create_time\": \"string\",\n      \"comment\": \"string\"\n    },\n    {\n      \"id\": 5446,\n      \"name\": \"string\",\n      \"upstream\": \"string\",\n      \"ports\": [\n        {\n          \"port\": 4345,\n          \"protocol\": \"string\"\n        },\n        {\n          \"port\": 2941,\n          \"protocol\": \"string\"\n        }\n      ],\n      \"enabled\": false,\n      \"policy_group_id\": 5075,\n      \"ssl_id\": 6690,\n      \"create_time\": \"string\",\n      \"comment\": \"string\"\n    }\n  ],\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9f6f55a-54ed-492f-a2b9-5a6736dda887",
+          "name": "Create Protected Website",
+          "request": {
+            "name": "Create Protected Website",
+            "description": {
+              "content": "Adds a new website to SafeLine WAF protection with reverse proxy configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "SoftwareReverseProxyWebsiteAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"upstream\": \"<string>\",\n  \"ports\": [\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    }\n  ],\n  \"ssl_id\": \"<integer>\",\n  \"policy_group_id\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d6242d6a-d6bb-4f2b-9213-bf9d6fa7e2da",
+              "name": "Website created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "SoftwareReverseProxyWebsiteAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"upstream\": \"<string>\",\n  \"ports\": [\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    }\n  ],\n  \"ssl_id\": \"<integer>\",\n  \"policy_group_id\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 4821,\n    \"name\": \"string\",\n    \"upstream\": \"string\",\n    \"ports\": [\n      {\n        \"port\": 5734,\n        \"protocol\": \"string\"\n      },\n      {\n        \"port\": 997,\n        \"protocol\": \"string\"\n      }\n    ],\n    \"enabled\": false,\n    \"policy_group_id\": 9025,\n    \"ssl_id\": 5227,\n    \"create_time\": \"string\",\n    \"comment\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b7ca08c-ece4-4059-b2f0-9f9b0bbb952a",
+          "name": "Update Protected Website",
+          "request": {
+            "name": "Update Protected Website",
+            "description": {
+              "content": "Updates the configuration of an existing protected website.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "SoftwareReverseProxyWebsiteAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"upstream\": \"<string>\",\n  \"ports\": [\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    }\n  ],\n  \"ssl_id\": \"<integer>\",\n  \"policy_group_id\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0f5d3c5-44ca-4d06-a53e-78a29b5c478f",
+              "name": "Website updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "SoftwareReverseProxyWebsiteAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"upstream\": \"<string>\",\n  \"ports\": [\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    }\n  ],\n  \"ssl_id\": \"<integer>\",\n  \"policy_group_id\": \"<integer>\",\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {\n    \"id\": 4821,\n    \"name\": \"string\",\n    \"upstream\": \"string\",\n    \"ports\": [\n      {\n        \"port\": 5734,\n        \"protocol\": \"string\"\n      },\n      {\n        \"port\": 997,\n        \"protocol\": \"string\"\n      }\n    ],\n    \"enabled\": false,\n    \"policy_group_id\": 9025,\n    \"ssl_id\": 5227,\n    \"create_time\": \"string\",\n    \"comment\": \"string\"\n  },\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d286a63-9b34-46f8-8d67-730341871b11",
+          "name": "Delete Protected Website",
+          "request": {
+            "name": "Delete Protected Website",
+            "description": {
+              "content": "Removes a website from SafeLine WAF protection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "SoftwareReverseProxyWebsiteAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a13d0959-d85a-4ea4-9cf7-7dd25d7d9608",
+              "name": "Website deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "SoftwareReverseProxyWebsiteAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74b623db-66a6-4dd3-8489-63ea23cc4111",
+          "name": "Enable or Disable Website Protection",
+          "request": {
+            "name": "Enable or Disable Website Protection",
+            "description": {
+              "content": "Enables or disables WAF protection for a specific website.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "EnableDisableWebsiteAPI"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SafeLine management server hostname or IP",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"enabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7df6dfd5-08c1-4caf-ad63-0291ff691754",
+              "name": "Website protection state updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "EnableDisableWebsiteAPI"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SafeLine management server hostname or IP",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SLCE-API-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"err\": \"string\",\n  \"data\": {},\n  \"msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SafeLine management server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}:9443",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SLCE-API-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5aa56c7e-0a6c-4181-b639-9f460796b34c",
+    "name": "SafeLine Management ACL Rules Websites API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.\n\nContact Support:\n Name: Chaitin Technology",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SafeLine Management ACL Rules API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SLCE-API-Token",
+      "value": "{{X-SLCE-API-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ACL Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ACL Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves configured access control list rules for blocking or allowing traffic."
+        },
+        {
+          "info": {
+            "name": "Create ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new access control rule for blocking or allowing specific traffic patterns."
+        },
+        {
+          "info": {
+            "name": "Update ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing access control rule."
+        },
+        {
+          "info": {
+            "name": "Delete ACL Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}:9443/api/ACLRuleAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes an access control rule."
+        },
+        {
+          "info": {
+            "name": "List ACL Whitelist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLWhiteListAPI"
+          },
+          "docs": "Retrieves IP addresses and patterns in the ACL whitelist."
+        },
+        {
+          "info": {
+            "name": "Add to ACL Whitelist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}:9443/api/ACLWhiteListAPI",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an IP address or CIDR block to the ACL whitelist."
+        },
+        {
+          "info": {
+            "name": "Get ACL Rule Execution Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}:9443/api/ACLRuleExecutionLogAPI",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves logs of ACL rule executions showing triggered rules and actions taken."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
