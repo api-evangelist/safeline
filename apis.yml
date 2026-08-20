@@ -26,6 +26,13 @@ tags:
   - Proxy
   - WAF
   - Security
+  - Open-Source
+  - Reverse Proxy
+  - API Gateway
+tags_raw:
+  - Proxy
+  - WAF
+  - Security
   - Open Source
   - Reverse Proxy
   - API Gateway
@@ -43,6 +50,11 @@ apis:
     analysis.
   humanURL: https://github.com/chaitin/SafeLine
   tags:
+  - WAF
+  - MCP
+  - Artificial Intelligence
+  - Security
+  tags_raw:
   - WAF
   - MCP
   - AI
@@ -145,6 +157,8 @@ apis:
   description: User account and permission management
   humanURL: https://waf.chaitin.com/
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
