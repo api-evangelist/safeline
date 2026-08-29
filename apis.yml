@@ -8,6 +8,19 @@ description: >-
   code protection, and integrates with API gateways including Apache APISIX and Kong. SafeLine exposes a management API
   on port 9443 and supports MCP server implementations for AI-assisted management.
 type: Index
+deliveryModel:
+  model: self-hosted
+  license: GPL-3.0
+  open_source: true
+  commercial: false
+  callable_host: false
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -185,6 +198,10 @@ apis:
   - type: GitHubRepository
     url: https://github.com/chaitin/SafeLine
 common:
+  - type: IssueTracker
+    url: https://github.com/chaitin/SafeLine/issues
+  - type: Releases
+    url: https://github.com/chaitin/SafeLine/releases
   - type: License
     name: GPL-3.0
     url: https://github.com/chaitin/SafeLine/blob/main/LICENSE
