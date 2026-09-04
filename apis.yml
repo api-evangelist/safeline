@@ -28,11 +28,13 @@ accessModel:
   try_now: true
   public: false
   label: Freemium · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  - {url: 'https://waf.chaitin.com/', status: 301, note: 'declared website redirects to https://cyberserval.tech/landing/safeline — a different registrable domain (chaitin.com -> cyberserval.tech), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/safeline.png
 tags:
