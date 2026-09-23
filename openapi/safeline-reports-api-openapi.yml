@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SafeLine Management ACL Rules Reports API
+  title: SafeLine Management Reports API
   description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
   version: 2.0.0
   contact:
@@ -81,19 +81,6 @@ components:
         msg:
           type: string
           nullable: true
-    GenerateReportRequest:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix timestamp for report start
-        end_time:
-          type: integer
-          description: Unix timestamp for report end
-        website_ids:
-          type: array
-          items:
-            type: integer
     Report:
       type: object
       properties:
@@ -113,6 +100,19 @@ components:
           - failed
         download_url:
           type: string
+    GenerateReportRequest:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
     ReportListResponse:
       type: object
       properties:

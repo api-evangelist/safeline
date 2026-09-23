@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SafeLine Management ACL Rules SSL Certificates API
+  title: SafeLine Management SSL Certificates API
   description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
   version: 2.0.0
   contact:
@@ -106,30 +106,6 @@ paths:
                 $ref: '#/components/schemas/CertificateResponse'
 components:
   schemas:
-    CertificateListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Certificate'
-        msg:
-          type: string
-          nullable: true
-    CertificateResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Certificate'
-        msg:
-          type: string
-          nullable: true
     SuccessResponse:
       type: object
       properties:
@@ -172,6 +148,30 @@ components:
               type: number
         create_time:
           type: string
+    CertificateResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+    CertificateListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

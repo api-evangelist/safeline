@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SafeLine Management ACL Rules Security Policies API
+  title: SafeLine Management Security Policies API
   description: SafeLine Management API provides programmatic control of the SafeLine WAF (Web Application Firewall) including application/website management, security policy configuration, ACL rules, SSL certificate management, user account management, attack event analysis, and system configuration. SafeLine is an open-source self-hosted WAF built by Chaitin Technology protecting over 1 million websites with over 30 billion daily HTTP requests.
   version: 2.0.0
   contact:
@@ -77,14 +77,29 @@ paths:
                 $ref: '#/components/schemas/PolicyRuleListResponse'
 components:
   schemas:
-    PolicyGroupResponse:
+    PolicyGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        comment:
+          type: string
+        rule_count:
+          type: integer
+        create_time:
+          type: string
+    PolicyGroupListResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          $ref: '#/components/schemas/PolicyGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyGroup'
         msg:
           type: string
           nullable: true
@@ -101,41 +116,6 @@ components:
         msg:
           type: string
           nullable: true
-    CreatePolicyGroupRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        comment:
-          type: string
-    PolicyGroupListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyGroup'
-        msg:
-          type: string
-          nullable: true
-    PolicyGroup:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        comment:
-          type: string
-        rule_count:
-          type: integer
-        create_time:
-          type: string
     PolicyRule:
       type: object
       properties:
@@ -151,6 +131,26 @@ components:
           type: boolean
         group_id:
           type: integer
+    CreatePolicyGroupRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
+    PolicyGroupResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

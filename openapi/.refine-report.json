@@ -1,21 +1,14 @@
 {
   "provider": "safeline",
   "sources": [
-    "safeline-acl-rules-api-openapi.yml",
-    "safeline-authentication-api-openapi.yml",
-    "safeline-reports-api-openapi.yml",
-    "safeline-security-policies-api-openapi.yml",
-    "safeline-ssl-certificates-api-openapi.yml",
-    "safeline-system-api-openapi.yml",
-    "safeline-users-api-openapi.yml",
-    "safeline-websites-api-openapi.yml"
+    "_original/safeline-management-openapi.yml"
   ],
   "outputs": [
     "safeline-acl-rules-api-openapi.yml",
     "safeline-authentication-api-openapi.yml",
     "safeline-reports-api-openapi.yml",
-    "safeline-security-policies-api-openapi.yml",
     "safeline-ssl-certificates-api-openapi.yml",
+    "safeline-security-policies-api-openapi.yml",
     "safeline-system-api-openapi.yml",
     "safeline-users-api-openapi.yml",
     "safeline-websites-api-openapi.yml"
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "safeline-management-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "safeline-acl-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-security-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-ssl-certificates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "safeline-websites-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
