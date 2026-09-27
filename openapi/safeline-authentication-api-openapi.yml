@@ -95,6 +95,17 @@ components:
           type: string
         last_login_time:
           type: string
+    LoginResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
     LoginRequest:
       type: object
       required:
@@ -110,17 +121,6 @@ components:
         tfa_token:
           type: string
           description: Two-factor authentication token if TFA is enabled
-    LoginResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/UserProfile'
-        msg:
-          type: string
-          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

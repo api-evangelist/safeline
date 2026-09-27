@@ -41,7 +41,7 @@ tags:
   - Proxy
   - WAF
   - Security
-  - Open-Source
+  - Open Source
   - Reverse Proxy
   - API Gateway
 tags_raw:
@@ -51,6 +51,7 @@ tags_raw:
   - Open Source
   - Reverse Proxy
   - API Gateway
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/safeline/refs/heads/main/apis.yml
 created: '2026-03-27'
 modified: '2026-05-19'

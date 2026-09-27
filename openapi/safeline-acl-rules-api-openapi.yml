@@ -210,77 +210,19 @@ components:
         msg:
           type: string
           nullable: true
-    WhitelistRequest:
-      type: object
-      required:
-      - ip
-      properties:
-        ip:
-          type: string
-          description: IP address or CIDR block to whitelist
-          example: 192.168.1.0/24
-        comment:
-          type: string
-    AclCondition:
+    AclRuleListResponse:
       type: object
       properties:
-        field:
+        err:
           type: string
-          enum:
-          - ip
-          - url
-          - method
-          - header
-          - body
-          - user_agent
-          - referer
-        operator:
-          type: string
-          enum:
-          - equals
-          - contains
-          - startswith
-          - endswith
-          - matches
-          - in_cidr
-        value:
-          type: string
-    UpdateAclRuleRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        action:
-          type: string
-          enum:
-          - block
-          - allow
-          - log
-        conditions:
+          nullable: true
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/AclCondition'
-    AclRule:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
+            $ref: '#/components/schemas/AclRule'
+        msg:
           type: string
-        action:
-          type: string
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AclCondition'
-        enabled:
-          type: boolean
-        create_time:
-          type: string
+          nullable: true
     WhitelistResponse:
       type: object
       properties:
@@ -298,19 +240,6 @@ components:
                 type: string
               comment:
                 type: string
-        msg:
-          type: string
-          nullable: true
-    AclRuleListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AclRule'
         msg:
           type: string
           nullable: true
@@ -346,6 +275,25 @@ components:
         msg:
           type: string
           nullable: true
+    UpdateAclRuleRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+          enum:
+          - block
+          - allow
+          - log
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
     AclRuleResponse:
       type: object
       properties:
@@ -357,6 +305,58 @@ components:
         msg:
           type: string
           nullable: true
+    AclRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        enabled:
+          type: boolean
+        create_time:
+          type: string
+    AclCondition:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - ip
+          - url
+          - method
+          - header
+          - body
+          - user_agent
+          - referer
+        operator:
+          type: string
+          enum:
+          - equals
+          - contains
+          - startswith
+          - endswith
+          - matches
+          - in_cidr
+        value:
+          type: string
+    WhitelistRequest:
+      type: object
+      required:
+      - ip
+      properties:
+        ip:
+          type: string
+          description: IP address or CIDR block to whitelist
+          example: 192.168.1.0/24
+        comment:
+          type: string
   securitySchemes:
     APITokenAuth:
       type: apiKey

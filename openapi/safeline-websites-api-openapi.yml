@@ -137,6 +137,18 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
     WebsiteResponse:
       type: object
       properties:
@@ -161,6 +173,34 @@ components:
         msg:
           type: string
           nullable: true
+    Website:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        enabled:
+          type: boolean
+        policy_group_id:
+          type: integer
+        ssl_id:
+          type: integer
+        create_time:
+          type: string
+        comment:
+          type: string
     UpdateWebsiteRequest:
       type: object
       required:
@@ -187,18 +227,6 @@ components:
           type: integer
         comment:
           type: string
-    SuccessResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          nullable: true
-        msg:
-          type: string
-          nullable: true
     CreateWebsiteRequest:
       type: object
       required:
@@ -230,34 +258,6 @@ components:
         policy_group_id:
           type: integer
           description: Security policy group ID to apply
-        comment:
-          type: string
-    Website:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        upstream:
-          type: string
-        ports:
-          type: array
-          items:
-            type: object
-            properties:
-              port:
-                type: integer
-              protocol:
-                type: string
-        enabled:
-          type: boolean
-        policy_group_id:
-          type: integer
-        ssl_id:
-          type: integer
-        create_time:
-          type: string
         comment:
           type: string
   securitySchemes:

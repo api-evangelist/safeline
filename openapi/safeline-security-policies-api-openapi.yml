@@ -77,19 +77,6 @@ paths:
                 $ref: '#/components/schemas/PolicyRuleListResponse'
 components:
   schemas:
-    PolicyGroup:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        comment:
-          type: string
-        rule_count:
-          type: integer
-        create_time:
-          type: string
     PolicyGroupListResponse:
       type: object
       properties:
@@ -103,16 +90,14 @@ components:
         msg:
           type: string
           nullable: true
-    PolicyRuleListResponse:
+    PolicyGroupResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyRule'
+          $ref: '#/components/schemas/PolicyGroup'
         msg:
           type: string
           nullable: true
@@ -140,14 +125,29 @@ components:
           type: string
         comment:
           type: string
-    PolicyGroupResponse:
+    PolicyGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        comment:
+          type: string
+        rule_count:
+          type: integer
+        create_time:
+          type: string
+    PolicyRuleListResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          $ref: '#/components/schemas/PolicyGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyRule'
         msg:
           type: string
           nullable: true

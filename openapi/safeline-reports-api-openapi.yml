@@ -69,18 +69,19 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    SuccessResponse:
+    GenerateReportRequest:
       type: object
       properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          nullable: true
-        msg:
-          type: string
-          nullable: true
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
     Report:
       type: object
       properties:
@@ -100,19 +101,6 @@ components:
           - failed
         download_url:
           type: string
-    GenerateReportRequest:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix timestamp for report start
-        end_time:
-          type: integer
-          description: Unix timestamp for report end
-        website_ids:
-          type: array
-          items:
-            type: integer
     ReportListResponse:
       type: object
       properties:
@@ -123,6 +111,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Report'
+        msg:
+          type: string
+          nullable: true
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
         msg:
           type: string
           nullable: true
