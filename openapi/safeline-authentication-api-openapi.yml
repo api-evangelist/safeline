@@ -51,6 +51,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    LoginResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
     ErrorResponse:
       type: object
       properties:
@@ -62,6 +73,21 @@ components:
         msg:
           type: string
           nullable: true
+    LoginRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+        tfa_token:
+          type: string
+          description: Two-factor authentication token if TFA is enabled
     UserProfile:
       type: object
       properties:
@@ -95,32 +121,6 @@ components:
           type: string
         last_login_time:
           type: string
-    LoginResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/UserProfile'
-        msg:
-          type: string
-          nullable: true
-    LoginRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          example: admin
-        password:
-          type: string
-          format: password
-        tfa_token:
-          type: string
-          description: Two-factor authentication token if TFA is enabled
   securitySchemes:
     APITokenAuth:
       type: apiKey

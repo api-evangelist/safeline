@@ -69,19 +69,6 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    GenerateReportRequest:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix timestamp for report start
-        end_time:
-          type: integer
-          description: Unix timestamp for report end
-        website_ids:
-          type: array
-          items:
-            type: integer
     Report:
       type: object
       properties:
@@ -126,6 +113,19 @@ components:
         msg:
           type: string
           nullable: true
+    GenerateReportRequest:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
   securitySchemes:
     APITokenAuth:
       type: apiKey

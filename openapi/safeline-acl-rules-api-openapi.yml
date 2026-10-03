@@ -177,6 +177,43 @@ paths:
                 $ref: '#/components/schemas/LogListResponse'
 components:
   schemas:
+    AclCondition:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - ip
+          - url
+          - method
+          - header
+          - body
+          - user_agent
+          - referer
+        operator:
+          type: string
+          enum:
+          - equals
+          - contains
+          - startswith
+          - endswith
+          - matches
+          - in_cidr
+        value:
+          type: string
+    AclRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclRule'
+        msg:
+          type: string
+          nullable: true
     CreateAclRuleRequest:
       type: object
       required:
@@ -198,6 +235,23 @@ components:
             $ref: '#/components/schemas/AclCondition'
         comment:
           type: string
+    AclRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        action:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AclCondition'
+        enabled:
+          type: boolean
+        create_time:
+          type: string
     SuccessResponse:
       type: object
       properties:
@@ -207,71 +261,6 @@ components:
         data:
           type: object
           nullable: true
-        msg:
-          type: string
-          nullable: true
-    AclRuleListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AclRule'
-        msg:
-          type: string
-          nullable: true
-    WhitelistResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              ip:
-                type: string
-              comment:
-                type: string
-        msg:
-          type: string
-          nullable: true
-    LogListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              rule_id:
-                type: integer
-              rule_name:
-                type: string
-              action:
-                type: string
-              src_ip:
-                type: string
-              dst_host:
-                type: string
-              request_method:
-                type: string
-              request_url:
-                type: string
-              trigger_time:
-                type: string
         msg:
           type: string
           nullable: true
@@ -305,47 +294,26 @@ components:
         msg:
           type: string
           nullable: true
-    AclRule:
+    WhitelistResponse:
       type: object
       properties:
-        id:
-          type: integer
-        name:
+        err:
           type: string
-        action:
-          type: string
-        conditions:
+          nullable: true
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/AclCondition'
-        enabled:
-          type: boolean
-        create_time:
+            type: object
+            properties:
+              id:
+                type: integer
+              ip:
+                type: string
+              comment:
+                type: string
+        msg:
           type: string
-    AclCondition:
-      type: object
-      properties:
-        field:
-          type: string
-          enum:
-          - ip
-          - url
-          - method
-          - header
-          - body
-          - user_agent
-          - referer
-        operator:
-          type: string
-          enum:
-          - equals
-          - contains
-          - startswith
-          - endswith
-          - matches
-          - in_cidr
-        value:
-          type: string
+          nullable: true
     WhitelistRequest:
       type: object
       required:
@@ -357,6 +325,38 @@ components:
           example: 192.168.1.0/24
         comment:
           type: string
+    LogListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              rule_id:
+                type: integer
+              rule_name:
+                type: string
+              action:
+                type: string
+              src_ip:
+                type: string
+              dst_host:
+                type: string
+              request_method:
+                type: string
+              request_url:
+                type: string
+              trigger_time:
+                type: string
+        msg:
+          type: string
+          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

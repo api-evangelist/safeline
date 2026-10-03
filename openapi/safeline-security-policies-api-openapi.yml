@@ -77,6 +77,15 @@ paths:
                 $ref: '#/components/schemas/PolicyRuleListResponse'
 components:
   schemas:
+    CreatePolicyGroupRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
     PolicyGroupListResponse:
       type: object
       properties:
@@ -116,15 +125,6 @@ components:
           type: boolean
         group_id:
           type: integer
-    CreatePolicyGroupRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        comment:
-          type: string
     PolicyGroup:
       type: object
       properties:
