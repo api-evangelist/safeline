@@ -201,6 +201,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/chaitin/SafeLine
 common:
+  - type: CapabilityMap
+    url: capabilities/safeline-capability-edges.yml
+    name: SafeLine Business Capability Map
   - type: IssueTracker
     url: https://github.com/chaitin/SafeLine/issues
   - type: Releases

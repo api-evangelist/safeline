@@ -1,0 +1,44 @@
+slug: safeline
+provider: SafeLine
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: ACL Rules
+  spec_file: safeline-acl-rules-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.78
+  evidence: POST /api/ACLRuleAPI  createAclRule  Create ACL Rule; GET /api/ACLWhiteListAPI  listAclWhitelist
+  reason: Creating and managing access-control rules and whitelists on a Web Application Firewall is configuration
+    of preventive security controls. Clearly Cybersecurity Management at L1; the evidence does not cleanly
+    name a single sub-capability (it sits between security architecture and threat response), so no L2.
+- tag: Security Policies
+  spec_file: safeline-security-policies-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.78
+  evidence: POST /api/PolicyGroupAPI  createPolicyGroup; GET /api/PolicyRuleAPI  listPolicyRules
+  reason: 'Creating policy groups and listing policy rules configures the WAF''s detection/blocking policy
+    — a security control capability. Deliberately L1 only: these are technical detection policies, not
+    the enterprise security policy framework of BC-620.10.'
+- tag: Websites
+  spec_file: safeline-websites-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: GET /api/SoftwareReverseProxyWebsiteAPI  listWebsites  List Protected Websites; POST /api/EnableDisableWebsiteAPI  toggleWebsiteProtection
+  reason: Onboarding sites behind the reverse proxy and toggling WAF protection is operation of application-layer
+    security controls. Cybersecurity Management at L1; no single sub-capability is named by the evidence.
