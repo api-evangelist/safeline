@@ -52,31 +52,6 @@ paths:
                 $ref: '#/components/schemas/LicenseResponse'
 components:
   schemas:
-    LicenseResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - community
-              - professional
-              - enterprise
-            expires_at:
-              type: string
-              nullable: true
-            features:
-              type: array
-              items:
-                type: string
-        msg:
-          type: string
-          nullable: true
     NodeInfoResponse:
       type: object
       properties:
@@ -102,6 +77,31 @@ components:
               type: integer
             uptime:
               type: integer
+        msg:
+          type: string
+          nullable: true
+    LicenseResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - community
+              - professional
+              - enterprise
+            expires_at:
+              type: string
+              nullable: true
+            features:
+              type: array
+              items:
+                type: string
         msg:
           type: string
           nullable: true

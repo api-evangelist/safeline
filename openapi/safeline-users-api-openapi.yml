@@ -179,16 +179,24 @@ components:
             type: string
         is_locked:
           type: boolean
-    UserListResponse:
+    CreateApiTokenResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserProfile'
+          type: object
+          properties:
+            id:
+              type: integer
+            token:
+              type: string
+              description: The generated API token value
+            comment:
+              type: string
+            create_time:
+              type: string
         msg:
           type: string
           nullable: true
@@ -225,6 +233,35 @@ components:
           type: string
         last_login_time:
           type: string
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    CreateUserRequest:
+      type: object
+      required:
+      - username
+      - password
+      - permissions
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        comment:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
     ApiTokenListResponse:
       type: object
       properties:
@@ -245,39 +282,6 @@ components:
         msg:
           type: string
           nullable: true
-    CreateApiTokenResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          properties:
-            id:
-              type: integer
-            token:
-              type: string
-              description: The generated API token value
-            comment:
-              type: string
-            create_time:
-              type: string
-        msg:
-          type: string
-          nullable: true
-    SuccessResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          nullable: true
-        msg:
-          type: string
-          nullable: true
     CreateApiTokenRequest:
       type: object
       required:
@@ -286,23 +290,6 @@ components:
         comment:
           type: string
           description: Description/label for this API token
-    CreateUserRequest:
-      type: object
-      required:
-      - username
-      - password
-      - permissions
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        comment:
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
     UserResponse:
       type: object
       properties:
@@ -311,6 +298,19 @@ components:
           nullable: true
         data:
           $ref: '#/components/schemas/UserProfile'
+        msg:
+          type: string
+          nullable: true
+    UserListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfile'
         msg:
           type: string
           nullable: true

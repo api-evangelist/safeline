@@ -69,6 +69,18 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
     Report:
       type: object
       properties:
@@ -88,31 +100,6 @@ components:
           - failed
         download_url:
           type: string
-    ReportListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Report'
-        msg:
-          type: string
-          nullable: true
-    SuccessResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: object
-          nullable: true
-        msg:
-          type: string
-          nullable: true
     GenerateReportRequest:
       type: object
       properties:
@@ -126,6 +113,19 @@ components:
           type: array
           items:
             type: integer
+    ReportListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+        msg:
+          type: string
+          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

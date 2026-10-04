@@ -137,43 +137,6 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    WebsiteResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Website'
-        msg:
-          type: string
-          nullable: true
-    UpdateWebsiteRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        upstream:
-          type: string
-        ports:
-          type: array
-          items:
-            type: object
-            properties:
-              port:
-                type: integer
-              protocol:
-                type: string
-        ssl_id:
-          type: integer
-        policy_group_id:
-          type: integer
-        comment:
-          type: string
     Website:
       type: object
       properties:
@@ -202,15 +165,42 @@ components:
           type: string
         comment:
           type: string
-    SuccessResponse:
+    UpdateWebsiteRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        ssl_id:
+          type: integer
+        policy_group_id:
+          type: integer
+        comment:
+          type: string
+    WebsiteListResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          type: object
-          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Website'
         msg:
           type: string
           nullable: true
@@ -247,16 +237,26 @@ components:
           description: Security policy group ID to apply
         comment:
           type: string
-    WebsiteListResponse:
+    SuccessResponse:
       type: object
       properties:
         err:
           type: string
           nullable: true
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Website'
+          type: object
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+    WebsiteResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Website'
         msg:
           type: string
           nullable: true

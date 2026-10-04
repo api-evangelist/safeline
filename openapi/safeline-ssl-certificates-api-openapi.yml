@@ -106,17 +106,6 @@ paths:
                 $ref: '#/components/schemas/CertificateResponse'
 components:
   schemas:
-    CertificateResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Certificate'
-        msg:
-          type: string
-          nullable: true
     CertificateListResponse:
       type: object
       properties:
@@ -127,6 +116,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Certificate'
+        msg:
+          type: string
+          nullable: true
+    CertificateResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Certificate'
         msg:
           type: string
           nullable: true
