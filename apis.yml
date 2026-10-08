@@ -201,6 +201,12 @@ apis:
   - type: GitHubRepository
     url: https://github.com/chaitin/SafeLine
 common:
+  - type: Plans
+    url: plans/safeline-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/safeline-rate-limits.yml
+  - type: FinOps
+    url: finops/safeline-finops.yml
   - type: CapabilityMap
     url: capabilities/safeline-capability-edges.yml
     name: SafeLine Business Capability Map
