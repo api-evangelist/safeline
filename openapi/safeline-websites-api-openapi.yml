@@ -137,73 +137,6 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
-    Website:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        upstream:
-          type: string
-        ports:
-          type: array
-          items:
-            type: object
-            properties:
-              port:
-                type: integer
-              protocol:
-                type: string
-        enabled:
-          type: boolean
-        policy_group_id:
-          type: integer
-        ssl_id:
-          type: integer
-        create_time:
-          type: string
-        comment:
-          type: string
-    UpdateWebsiteRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        upstream:
-          type: string
-        ports:
-          type: array
-          items:
-            type: object
-            properties:
-              port:
-                type: integer
-              protocol:
-                type: string
-        ssl_id:
-          type: integer
-        policy_group_id:
-          type: integer
-        comment:
-          type: string
-    WebsiteListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Website'
-        msg:
-          type: string
-          nullable: true
     CreateWebsiteRequest:
       type: object
       required:
@@ -237,6 +170,58 @@ components:
           description: Security policy group ID to apply
         comment:
           type: string
+    WebsiteResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+    WebsiteListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Website'
+        msg:
+          type: string
+          nullable: true
+    Website:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        upstream:
+          type: string
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        enabled:
+          type: boolean
+        policy_group_id:
+          type: integer
+        ssl_id:
+          type: integer
+        create_time:
+          type: string
+        comment:
+          type: string
     SuccessResponse:
       type: object
       properties:
@@ -249,17 +234,32 @@ components:
         msg:
           type: string
           nullable: true
-    WebsiteResponse:
+    UpdateWebsiteRequest:
       type: object
+      required:
+      - id
       properties:
-        err:
+        id:
+          type: integer
+        name:
           type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Website'
-        msg:
+        upstream:
           type: string
-          nullable: true
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              port:
+                type: integer
+              protocol:
+                type: string
+        ssl_id:
+          type: integer
+        policy_group_id:
+          type: integer
+        comment:
+          type: string
   securitySchemes:
     APITokenAuth:
       type: apiKey

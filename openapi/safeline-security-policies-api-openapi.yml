@@ -77,6 +77,65 @@ paths:
                 $ref: '#/components/schemas/PolicyRuleListResponse'
 components:
   schemas:
+    PolicyGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        comment:
+          type: string
+        rule_count:
+          type: integer
+        create_time:
+          type: string
+    PolicyRuleListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyRule'
+        msg:
+          type: string
+          nullable: true
+    PolicyGroupListResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+    PolicyGroupResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/PolicyGroup'
+        msg:
+          type: string
+          nullable: true
+    CreatePolicyGroupRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        comment:
+          type: string
     PolicyRule:
       type: object
       properties:
@@ -92,65 +151,6 @@ components:
           type: boolean
         group_id:
           type: integer
-    PolicyGroup:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        comment:
-          type: string
-        rule_count:
-          type: integer
-        create_time:
-          type: string
-    PolicyGroupListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyGroup'
-        msg:
-          type: string
-          nullable: true
-    CreatePolicyGroupRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        comment:
-          type: string
-    PolicyGroupResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/PolicyGroup'
-        msg:
-          type: string
-          nullable: true
-    PolicyRuleListResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyRule'
-        msg:
-          type: string
-          nullable: true
   securitySchemes:
     APITokenAuth:
       type: apiKey

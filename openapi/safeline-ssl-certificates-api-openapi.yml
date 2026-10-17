@@ -119,17 +119,6 @@ components:
         msg:
           type: string
           nullable: true
-    CertificateResponse:
-      type: object
-      properties:
-        err:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Certificate'
-        msg:
-          type: string
-          nullable: true
     SuccessResponse:
       type: object
       properties:
@@ -139,6 +128,17 @@ components:
         data:
           type: object
           nullable: true
+        msg:
+          type: string
+          nullable: true
+    CertificateResponse:
+      type: object
+      properties:
+        err:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Certificate'
         msg:
           type: string
           nullable: true

@@ -69,6 +69,19 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
 components:
   schemas:
+    GenerateReportRequest:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix timestamp for report start
+        end_time:
+          type: integer
+          description: Unix timestamp for report end
+        website_ids:
+          type: array
+          items:
+            type: integer
     SuccessResponse:
       type: object
       properties:
@@ -100,19 +113,6 @@ components:
           - failed
         download_url:
           type: string
-    GenerateReportRequest:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix timestamp for report start
-        end_time:
-          type: integer
-          description: Unix timestamp for report end
-        website_ids:
-          type: array
-          items:
-            type: integer
     ReportListResponse:
       type: object
       properties:
